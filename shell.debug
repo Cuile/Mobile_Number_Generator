@@ -13,4 +13,4 @@ docker container run ^
         -v "%cd%":/root ^
         -w /root ^
         python-dev-env:1 ^
-        pyinstaller --onefile --name 2md5 --paths . --noconfirm --clean 2md5.py
+        pyinstaller --onefile --name 2hash --paths . --noconfirm --clean 2md5.py
