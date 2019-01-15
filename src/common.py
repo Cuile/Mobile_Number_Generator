@@ -15,6 +15,6 @@ def timing_ends():
     end = time.clock()
     endTime = time.time()
     print("-------------------------------------------------------------------------")
-    print("CPU Running time: %fs" % (end - start))
-    print("Script Running time: %fs" % (endTime - startTime))
+    print("CPU Running time: {fs:.2f}s".format(fs=(end - start)))
+    print("Script Running time: {fs:.2f}s".format(fs=(endTime - startTime)))
     print("-------------------------------------------------------------------------")
