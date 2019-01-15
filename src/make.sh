@@ -7,6 +7,6 @@ pyinstaller --onefile \
             --distpash ../bin \
             --workpath ../build \
             --hidden-import encodings.idna \
-            --name 2hash \
+            --name check_value \
             --clean \
-            2md5.py
+            main.py
