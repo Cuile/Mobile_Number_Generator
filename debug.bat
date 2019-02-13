@@ -5,4 +5,4 @@ docker container run ^
         -v "%cd%"\src:/root/code ^
         -v D:\Data_Label\:/root/data ^
         -w /root/code ^
-        python-dev-env:1
+        md5.collision:1
