@@ -3,7 +3,7 @@
 import re
 
 
-def make_it_complete(imei_str: str):
+def __make_imei(imei_str: str):
     # 奇数位之和
     even_Sum = 0
     # 偶数位之和
@@ -18,27 +18,31 @@ def make_it_complete(imei_str: str):
     return ''.join([imei_str, str(check_code)])
 
 
-def getCheckCode(type: str, imei: str):
+def __make_emid(emid_str: str):
+    pass
+
+
+def check_device_code(type: str, code: str):
     if type == 'imei':
-        # 判断 imei 为14位数字
-        if re.match(r'^\d{14}$', imei):
-            # 返回 True,完整的imei
-            return {'check': True, 'imei': make_it_complete(str(imei))}
         # 判断 imei 为15位数字
-        elif re.match(r'^\d{15}$', imei):
-            # 取前14位数字，进行校验
-            complete_imei = make_it_complete(re.match(r'^(\d{14})\d$', imei).group(1))
-            # 判断校验后的值是否相等
-            if imei == complete_imei:
-                # 返回 True,原始的imei
-                return {'check': True, 'imei': imei}
+        if re.match(r'^\d{15}$', code):
+            # 取前14位数字，生成15位的完整imei号码
+            new_imei = __make_imei(re.match(r'^(\d{14})\d$', code).group(1))
+            # 判断前后两个imei值是否相等
+            if code == new_imei:
+                # 返回 True，返回原始的imei
+                return {'check': True, 'imei': code}
             else:
-                # 返回 False,正确的imei
-                return {'check': False, 'imei': complete_imei}
+                # 返回 False，返回正确的imei
+                return {'check': False, 'imei': new_imei}
+        # 判断 imei 为14位数字
+        elif re.match(r'^\d{14}$', code):
+            # 返回 False，返回完整的imei
+            return {'check': False, 'imei': __make_imei(str(code))}
         else:
-            # 返回 False,imei为None
+            # 返回 False，返回None
             return {'check': False, 'imei': None}
     elif type == 'emid':
-        pass
+        __make_emid(code)
     else:
         raise RuntimeError('getCheckCode type error')
