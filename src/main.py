@@ -86,6 +86,7 @@ try:
                 with open(args.source_file, 'rt') as rf:
                     csv_reader = csv.reader(rf)
                     if args.target_file:
+                        # 将设备码类型，做为输出文件后缀
                         with open('{filename}.{ext}'.format(filename=filename, ext=args.type), 'wt') as wf:
                             csv_writer = csv.writer(wf)
                             for r in csv_reader:
