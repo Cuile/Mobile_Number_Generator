@@ -67,14 +67,14 @@ try:
                     csv_writer = csv.writer(f)
                     for i in range(s, e):
                         pn = str(i)
-                        csv_writer.writerow([pn, hash.getHash(args.h, pn)])
+                        csv_writer.writerow([pn, hash.getHash(args.hash, pn)])
             elif args.source_file:
                 (filename, extension) = os.path.splitext(args.source_file)
-                with open(args.source_file, 'rt')as rf, open(filename + "." + args.h, 'wt')as wf:
+                with open(args.source_file, 'rt')as rf, open(filename + "." + args.hash, 'wt')as wf:
                     csv_reader = csv.reader(rf)
                     csv_writer = csv.writer(wf)
                     for r in csv_reader:
-                        csv_writer.writerow([hash.getHash(args.h, r[0])])
+                        csv_writer.writerow([hash.getHash(args.hash, r[0])])
             else:
                 raise RuntimeError('请使用 -t 或 -r 或 -sf 设置参数')
         else:
