@@ -6,4 +6,5 @@ services:
     volumes:
       - ../src:/root/src/:ro
       - ../data:/root/data/:rw
+    working_dir:  /root/
     tty: true
