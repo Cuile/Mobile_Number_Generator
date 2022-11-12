@@ -1,8 +1,8 @@
 version: "3.7"
 services:
   mobile_number_generator:
-    image: mobile_number_generator
-    container_name: mobile_number_generator
+    image: mobile_number_generator-alpine
+    container_name: mobile_number_generator-alpine
     build: 
       context: .
       dockerfile: ./3.7-alpine.Dockerfile
