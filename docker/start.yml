@@ -4,6 +4,7 @@ services:
     image: mobile_number_generator
     build: 
       dockerfile: ./Dockerfile
+      target: mobile_number_generator
     volumes:
       - ../src:/root/src/:ro
       - ../data:/root/data/:rw
