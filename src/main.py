@@ -55,30 +55,40 @@ args = parser.parse_args()
 common.timing_starts()
 try:
     if args.function == 'make':
-        if args.hash:
-            if not args.path:
-                args.path = "."
-            if args.number:
+        
+        if not args.path:
+            args.path = "."
+        if args.number:
+            if args.hash:
                 print({'number': args.number, args.hash: hash.getHash(args.hash, str(args.number))})
-            elif args.range:
-                s = int(args.range) * 100000000
-                e = (int(args.range) + 1) * 100000000
-                with open(args.path + "/" + str(args.number) + '.csv', 'wt') as f:
-                    csv_writer = csv.writer(f)
+            else:
+                raise RuntimeError('--hash 未设置')
+        # 按号段生成号码
+        elif args.range:
+            s = int(args.range) * 100000000
+            e = (int(args.range) + 1) * 100000000
+            target_file = args.path + "/" + str(args.number) + '.csv'
+            print(target_file)
+            with open(target_file, 'wt') as f:
+                csv_writer = csv.writer(f)
+                if args.hash:
                     for i in range(s, e):
                         pn = str(i)
                         csv_writer.writerow([pn, hash.getHash(args.hash, pn)])
-            elif args.source_file:
-                (filename, extension) = os.path.splitext(args.source_file)
-                with open(args.source_file, 'rt')as rf, open(filename + "." + args.hash, 'wt')as wf:
-                    csv_reader = csv.reader(rf)
-                    csv_writer = csv.writer(wf)
-                    for r in csv_reader:
-                        csv_writer.writerow([hash.getHash(args.hash, r[0])])
-            else:
-                raise RuntimeError('请使用 -t 或 -r 或 -sf 设置参数')
+                else:
+                    for i in range(s, e):
+                        pn = str(i)
+                        csv_writer.writerow([pn])
+        elif args.source_file:
+            (filename, extension) = os.path.splitext(args.source_file)
+            with open(args.source_file, 'rt')as rf, open(filename + "." + args.hash, 'wt')as wf:
+                csv_reader = csv.reader(rf)
+                csv_writer = csv.writer(wf)
+                for r in csv_reader:
+                    csv_writer.writerow([hash.getHash(args.hash, r[0])])
         else:
-            raise RuntimeError('--hash 未设置')
+            raise RuntimeError('请使用 -t 或 -r 或 -sf 设置参数')
+        
     elif args.function == 'check':
         if args.type:
             if args.code:
