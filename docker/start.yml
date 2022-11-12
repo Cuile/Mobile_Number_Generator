@@ -2,9 +2,10 @@ version: "3.7"
 services:
   mobile_number_generator:
     image: mobile_number_generator
+    container_name: mobile_number_generator
     build: 
+      context: .
       dockerfile: ./Dockerfile
-      target: mobile_number_generator
     volumes:
       - ../src:/root/src/:ro
       - ../data:/root/data/:rw
