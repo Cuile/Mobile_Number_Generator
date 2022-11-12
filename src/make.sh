@@ -2,10 +2,9 @@
 
 pyinstaller --onefile \
             --noconfirm \
-            --clean \
             --paths . \
-            --distpash . \
-            --workpath ../build \
+            --distpash ./bin \
+            --workpath ./build \
             --hidden-import encodings.idna \
             --name mng \
             --clean \
