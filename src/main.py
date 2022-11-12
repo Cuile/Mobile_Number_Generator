@@ -1,8 +1,6 @@
 # coding:utf-8
 
 import argparse
-import csv
-import os
 import textwrap
 
 import check_sum
