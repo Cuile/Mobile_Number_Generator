@@ -7,7 +7,9 @@ services:
       context: .
       dockerfile: ./Dockerfile
     volumes:
-      - ../src:/root/src/:ro
+      - ../src:/root/src/:rw
       - ../data:/root/data/:rw
+      - ../bin:/root/bin/:rw
+      - ../build:/root/build/:rw
     working_dir:  /root/src/
     tty: true
