@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   mobile_number_generator:
-    image: mobile_number_generator:1
+    image: mobile_number_generator
     build: 
       dockerfile: ./Dockerfile
     volumes:
