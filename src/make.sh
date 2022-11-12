@@ -7,6 +7,6 @@ pyinstaller --onefile \
             --distpash ../bin \
             --workpath ../build \
             --hidden-import encodings.idna \
-            --name check_value \
+            --name mng \
             --clean \
             main.py
