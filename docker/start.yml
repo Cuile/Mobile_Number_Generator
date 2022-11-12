@@ -4,5 +4,5 @@ services:
     image: mobile_number_generator:1
     container_name: mobile_number_generator
     volumes:
-      - ../src:~/src/:ro
-      - ../data:~/data/:rw
+      - ../src:/root/src/:ro
+      - ../data:/root/data/:rw
