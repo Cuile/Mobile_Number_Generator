@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  mobile_number_generator:
+    image: mobile_number_generator:1
+    container_name: mobile_number_generator
+    volumes:
+      - ../src:~/src/:ro
+      - ../data:~/data/:rw
