@@ -29,8 +29,8 @@ def getHash(hash: str, value: str):
 
 # 根据号段生成号码及hash值
 def make_ragne(range: int, path: str, hash=None):
-    s = int(range) * 100000000
-    e = (int(range) + 1) * 100000000
+    s = range * 100000000
+    e = (range + 1) * 100000000
     target_file = path + "/" + str(range) + '.csv'
     print('生成文件' + target_file)
     with open(target_file, 'wt') as f:
