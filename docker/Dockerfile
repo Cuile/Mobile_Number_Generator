@@ -1,6 +1,6 @@
 FROM python:3.7-buster
 
-RUN apt-get install -y dos2unix binutils
+RUN apt-get install -y binutils
 
 RUN pip install --no-cache-dir pyinstaller==3.4
 
