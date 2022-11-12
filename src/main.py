@@ -12,14 +12,12 @@ import hash
 parser = argparse.ArgumentParser(description=textwrap.dedent('''生成手机号和对应的校验码'''))
 subparsers = parser.add_subparsers(title='子命令', dest='function')
 
-make_ragne = subparsers.add_parser('make_ragne', help='生成手机号码', description=textwrap.dedent('''生成手机号对应的校验码'''),
+make_ragne = subparsers.add_parser('make_ragne', help='生成手机号码', description=textwrap.dedent('''根据手机号段生成手机号码'''),
                                    epilog=textwrap.dedent('''
-                                    使用方法：
-                                    将3位手机号段内的所有号码生成MD5码，生成“3位号段+.csv”的文件
                                     use: ./2md5 -r 139 -p ../data
                                     out: 139.csv
                                     '''), formatter_class=argparse.RawTextHelpFormatter)
-make_ragne.add_argument('-r', '--range', metavar="range", dest="range", type=int, action='store', help='手机号号段前3位，如 133')
+make_ragne.add_argument('-r', '--range', metavar="range", dest="range", type=int, action='store', help='手机号段前3位，如133')
 make_ragne.add_argument('-p', '--path', metavar="path", dest="path", action='store', help="生成文件的保存路径")
 
 make_hash = subparsers.add_parser('make_hash', help='生成号码hash值', description=textwrap.dedent('''生成手机号对应的hash值'''),
