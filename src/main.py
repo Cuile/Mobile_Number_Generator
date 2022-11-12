@@ -87,10 +87,14 @@ if __name__ == '__main__':
     subparsers = parser.add_subparsers(title='子命令', dest='function')
 
     make_ragne = subparsers.add_parser('make_ragne', help='生成手机号码', description=textwrap.dedent('''根据手机号段生成手机号码'''),
-                                    epilog=textwrap.dedent('''
-                                        use: ./mng -r 139 -p ../data
-                                        out: 139.csv
-                                        '''), formatter_class=argparse.RawTextHelpFormatter)
+                                    epilog=textwrap.dedent(
+                                        '''
+                                        
+                                        use: ./mng make_ragne -r 139 -p ../data
+                                        out: ../data/139.csv
+
+                                        '''
+                                    ), formatter_class=argparse.RawTextHelpFormatter)
     make_ragne.add_argument('-r', '--range', metavar="range", dest="range", type=int, action='store', help='手机号段前3位，如133')
     make_ragne.add_argument('-p', '--path', metavar="path", dest="path", action='store', help="生成文件的保存路径")
 
