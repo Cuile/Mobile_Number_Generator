@@ -9,10 +9,20 @@ import check_sum
 import common
 import hash
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description=textwrap.dedent('''生成手机号和对应的校验码'''))
 subparsers = parser.add_subparsers(title='子命令', dest='function')
 
-make_parse = subparsers.add_parser('make', help='生成校验码', description=textwrap.dedent('''生成手机号对应的校验码'''),
+make_ragne = subparsers.add_parser('make_ragne', help='生成手机号码', description=textwrap.dedent('''生成手机号对应的校验码'''),
+                                   epilog=textwrap.dedent('''
+                                    使用方法：
+                                    将3位手机号段内的所有号码生成MD5码，生成“3位号段+.csv”的文件
+                                    use: ./2md5 -r 139 -p ../data
+                                    out: 139.csv
+                                    '''), formatter_class=argparse.RawTextHelpFormatter)
+make_ragne.add_argument('-r', '--range', metavar="range", dest="range", type=int, action='store', help='手机号号段前3位，如 133')
+make_ragne.add_argument('-p', '--path', metavar="path", dest="path", action='store', help="生成文件的保存路径")
+
+make_hash = subparsers.add_parser('make_hash', help='生成号码hash值', description=textwrap.dedent('''生成手机号对应的hash值'''),
                                    epilog=textwrap.dedent('''
                                     =======================================================================
                                     使用方法：
@@ -26,14 +36,12 @@ make_parse = subparsers.add_parser('make', help='生成校验码', description=t
                                     out: target_file.sha256
                                     =======================================================================
                                                             '''), formatter_class=argparse.RawTextHelpFormatter)
-make_parse.add_argument("--hash", metavar="hash", dest='hash', type=str, action='store', choices={'md5', 'sha256'},
-                        help="校验算法")
-make_parse.add_argument('-p', '--path', metavar="path", dest="path", action='store', help="生成文件的保存路径")
-make_group = make_parse.add_mutually_exclusive_group()
-make_group.add_argument('-n', '--number', metavar="number", dest="number", type=int, action='store', help='手机号码')
-make_group.add_argument('-r', '--range', metavar="range", dest="range", type=int, action='store', help='手机号号段前3位，如 133')
-make_group.add_argument('-sf', '--source_file', metavar="source_file", dest="source_file", type=str, action='store',
-                        help='手机号源文件')
+make_hash.add_argument("--hash", metavar="hash", dest='hash', type=str, action='store', choices={'md5', 'sha256'}, help="校验算法")
+make_hash.add_argument('-p', '--path', metavar="path", dest="path", action='store', help="生成文件的保存路径")
+make_hash_group = make_hash.add_mutually_exclusive_group()
+make_hash_group.add_argument('-n', '--number', metavar="number", dest="number", type=int, action='store', help='手机号码')
+make_hash_group.add_argument('-r', '--range', metavar="range", dest="range", type=int, action='store', help='手机号号段前3位，如 133')
+make_hash_group.add_argument('-sf', '--source_file', metavar="source_file", dest="source_file", type=str, action='store', help='手机号源文件')
 
 check_parse = subparsers.add_parser('check',
                                     help='校验设备码',
@@ -87,8 +95,8 @@ try:
                 for r in csv_reader:
                     csv_writer.writerow([hash.getHash(args.hash, r[0])])
         else:
-            raise RuntimeError('请使用 -t 或 -r 或 -sf 设置参数')
-        
+            raise RuntimeError('请使用 -n 或 -r 或 -sf 设置参数')
+    # 以下代码未做调试        
     elif args.function == 'check':
         if args.type:
             if args.code:
