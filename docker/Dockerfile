@@ -1,6 +1,6 @@
-FROM python:3.7-alpine
+FROM python:3.7-buster
 
-RUN apk add dos2unix binutils libc6 libc-bin
+RUN apk-get install -y dos2unix binutils
 
 RUN pip install --no-cache-dir pyinstaller==3.4
 
