@@ -1,6 +1,6 @@
 FROM python:3.7-buster
 
-RUN apt-get install -y binutils libc6
+RUN apt-get install -y binutils libc6 libc-bin
 
 RUN pip install --no-cache-dir pyinstaller==3.4
 
