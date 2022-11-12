@@ -6,3 +6,4 @@ services:
     volumes:
       - ../src:/root/src/:ro
       - ../data:/root/data/:rw
+    command: /bin/sh
