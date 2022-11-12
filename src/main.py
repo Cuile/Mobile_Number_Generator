@@ -67,7 +67,7 @@ try:
         elif args.range:
             s = int(args.range) * 100000000
             e = (int(args.range) + 1) * 100000000
-            target_file = args.path + "/" + str(args.number) + '.csv'
+            target_file = args.path + "/" + str(args.range) + '.csv'
             print(target_file)
             with open(target_file, 'wt') as f:
                 csv_writer = csv.writer(f)
