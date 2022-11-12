@@ -9,5 +9,5 @@ services:
     volumes:
       - ../src:/root/src/:ro
       - ../data:/root/data/:rw
-    working_dir:  /root/
+    working_dir:  /root/src/
     tty: true
