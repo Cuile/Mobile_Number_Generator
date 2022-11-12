@@ -1,3 +1,3 @@
 # /bin/bash
 
-docker compose -f start.yml down
+docker compose -f $1 down
