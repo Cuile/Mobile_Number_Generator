@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-RUN apk add binutils libc6 libc-bin
+RUN apk add binutils
 
 RUN pip install --no-cache-dir pyinstaller==3.4
 
