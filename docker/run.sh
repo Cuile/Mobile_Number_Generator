@@ -1,3 +1,3 @@
 # /bin/bash
 
-docker compose -f start.yml up
+docker compose -f start.yml up -d
