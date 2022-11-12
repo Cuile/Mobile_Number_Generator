@@ -28,7 +28,7 @@ make_parse = subparsers.add_parser('make', help='生成校验码', description=t
                                                             '''), formatter_class=argparse.RawTextHelpFormatter)
 make_parse.add_argument("--hash", metavar="hash", dest='hash', type=str, action='store', choices={'md5', 'sha256'},
                         help="校验算法")
-# make_parse.add_argument('-tf', '--target_file', dest="target_file", action='store_true', help="生成的目标文件")
+make_parse.add_argument('-p', '--path', metavar="path" dest="path", action='store', help="生成文件的保存路径")
 make_group = make_parse.add_mutually_exclusive_group()
 make_group.add_argument('-n', '--number', metavar="number", dest="number", type=int, action='store', help='手机号码')
 make_group.add_argument('-r', '--range', metavar="range", dest="range", type=int, action='store', help='手机号号段前3位，如 133')
@@ -56,12 +56,14 @@ common.timing_starts()
 try:
     if args.function == 'make':
         if args.hash:
+            if not args.path:
+                args.path = "."
             if args.number:
                 print({'number': args.number, args.hash: hash.getHash(args.hash, str(args.number))})
             elif args.range:
                 s = int(args.range) * 100000000
                 e = (int(args.range) + 1) * 100000000
-                with open(str(args.number) + '.csv', 'wt') as f:
+                with open(args.path + "/" + str(args.number) + '.csv', 'wt') as f:
                     csv_writer = csv.writer(f)
                     for i in range(s, e):
                         pn = str(i)
