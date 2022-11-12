@@ -28,10 +28,10 @@ def getHash(hash: str, value: str):
         return hashlib.sha256(value.encode(encoding='utf-8')).hexdigest()
 
 # 根据号段生成号码及hash值
-def make_ragne(range: int, path: str, hash=None):
-    s = range * 100000000
-    e = (range + 1) * 100000000
-    target_file = path + "/" + str(range) + '.csv'
+def make_ragne(r: int, path: str, hash=None):
+    s = r * 100000000
+    e = (r + 1) * 100000000
+    target_file = path + "/" + str(r) + '.csv'
     print('生成文件' + target_file)
     with open(target_file, 'wt') as f:
         csv_writer = csv.writer(f)
