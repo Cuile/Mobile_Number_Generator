@@ -1,5 +1,4 @@
 #! /bin/sh
-cp requirements.txt ../env/
 pyinstaller --onefile \
             --noconfirm \
             --paths . \
