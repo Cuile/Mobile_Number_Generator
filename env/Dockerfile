@@ -2,7 +2,9 @@ FROM python:3.7-buster
 
 RUN apt-get install -y binutils libc6 libc-bin
 
-RUN pip install --no-cache-dir pyinstaller==3.4
+# RUN pip install --no-cache-dir pyinstaller==3.4
+COPY ../src/requirements.txt /tmp/requirements.txt 
+RUN pip install --no-cache-dir -r /tmp/requirements.txt 
 
 # RUN echo "export PS1='[\A \u@\H \w]\\$ '" >> $HOME/.bashrc \
 # 	&& echo "alias ll='ls -lh --color'" >> $HOME/.bashrc
