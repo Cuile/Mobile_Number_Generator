@@ -96,7 +96,7 @@ if __name__ == '__main__':
                                         '''
                                     ), formatter_class=argparse.RawTextHelpFormatter)
     make_ragne.add_argument('-r', '--range', metavar="range", dest="range", type=int, action='store', help='手机号段前3位，如133')
-    make_ragne.add_argument('-p', '--path', metavar="path", dest="path", action='store', help="生成文件的保存路径")
+    make_ragne.add_argument('-p', '--path', metavar="path", dest="path", type=str, action='store', help="生成文件的保存路径")
 
     # make_hash = subparsers.add_parser('make_hash', help='生成号码hash值', description=textwrap.dedent('''生成手机号对应的hash值'''),
     #                                    epilog=textwrap.dedent('''
