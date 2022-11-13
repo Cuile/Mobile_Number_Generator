@@ -86,7 +86,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=textwrap.dedent('''生成手机号和对应的校验码'''))
     subparsers = parser.add_subparsers(title='子命令', dest='function')
 
-    make_ragne = subparsers.add_parser('make_ragne', help='生成手机号码', description=textwrap.dedent('''根据手机号段生成手机号码'''),
+    make_ragne = subparsers.add_parser('make_ragne', help='根据手机号段生成手机号码', description=textwrap.dedent('''根据手机号段生成手机号码'''),
                                     epilog=textwrap.dedent(
                                         '''
                                         
