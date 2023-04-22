@@ -12,5 +12,4 @@ services:
       - ../bin:/root/bin/:rw
       - ../build:/root/build/:rw
     working_dir:  /root/src/
-    entrypoint: ["python", "main.py"]
-    command: ["-h"]
+    tty: true
