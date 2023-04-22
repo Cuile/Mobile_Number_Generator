@@ -12,4 +12,3 @@ services:
       - ../bin:/root/bin/:rw
       - ../build:/root/build/:rw
     working_dir:  /root/src/
-    tty: true
