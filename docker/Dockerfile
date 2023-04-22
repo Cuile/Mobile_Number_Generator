@@ -1,6 +1,6 @@
-FROM python:3.7-buster
+FROM python:3.11.3-alpine
 
-RUN apt-get install -y binutils libc6 libc-bin
+# RUN apt-get install -y binutils libc6 libc-bin
 
 # RUN pip install --no-cache-dir pyinstaller==3.4
 COPY ./requirements.txt /tmp/requirements.txt 
