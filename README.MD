@@ -1,9 +1,26 @@
-运行编译好的文件时，如果碰到下面的报错，说明需要升级 glibc 包的版本
+## 一、直接使用
+
+命令行参数直接传递给镜像里的程序，直接生成结果。
+```bash
+$ cd docker
+
+$ sh mng.sh -h
+$ sh mng.sh make_ragne -h
+$ sh mng.sh make_ragne -r 135 -p ../data
+```
+相关技术请参阅：
+- [Dockerfile: ENTRYPOINT和CMD的区别](https://zhuanlan.zhihu.com/p/30555962)
+- [docker compose run](https://docs.docker.com/engine/reference/commandline/compose_run/)
+- [Shell 传递参数](https://www.runoob.com/linux/linux-shell-passing-arguments.html)
+
+## 二、编译使用
+
+运行编译好的文件时，如果碰到下面的报错，说明需要升级 glibc 包的版本。
 ```bash
 Error loading Python lib '/tmp/_MEIa23XFM/libpython3.7m.so.1.0': dlopen: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by /tmp/_MEIa23XFM/libpython3.7m.so.1.0)
 ```
 
-## 升级到glibc-2.28
+### 升级到glibc-2.28
 
 ```bash
 $ cd ~
