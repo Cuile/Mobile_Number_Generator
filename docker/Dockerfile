@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt
 # RUN echo "export PS1='[\A \u@\H \w]\\$ '" >> $HOME/.bashrc \
 # 	&& echo "alias ll='ls -lh --color'" >> $HOME/.bashrc
 
-CMD ["/bin/bash"]
+CMD ["/bin/sh"]
