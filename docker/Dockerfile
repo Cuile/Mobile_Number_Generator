@@ -1,4 +1,4 @@
-FROM python:3.11.3-alpine
+FROM python:3.7.16-alpine
 
 # RUN apt-get install -y binutils libc6 libc-bin
 
