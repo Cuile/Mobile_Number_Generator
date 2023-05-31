@@ -3,6 +3,7 @@ import time
 import hashlib
 import csv
 import os
+import linecache
 
 
 # 计时函数
@@ -43,3 +44,10 @@ def make_ragne(r: int, path: str, hash=None):
             for i in range(s, e):
                 pn = str(i)
                 csv_writer.writerow([pn])
+
+# 随机排序已生成的手机号码
+def make_random(file: str):
+    with open(file, 'r') as f:
+        # with open('tmp.csv', 'a') as t:
+        row = linecache.getline(f, 10)
+        print(row)

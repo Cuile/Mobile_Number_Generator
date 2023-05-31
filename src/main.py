@@ -16,6 +16,11 @@ def main():
                 common.make_ragne(args.range, args.path)
             else:
                 raise RuntimeError('-r 未设置')
+        elif args.function == 'make_random':
+            if not args.file:
+                raise RuntimeError('-f 参数未指定')
+            else:
+                common.make_random(args.file)
         # 以下代码未做调试        
         elif args.function == 'make_hash':
             if not args.path:
@@ -83,20 +88,30 @@ def main():
     common.timing_ends()
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description=textwrap.dedent('''生成手机号和对应的校验码'''))
+    parser = argparse.ArgumentParser(description=textwrap.dedent('''生成手机号和对应的校验码''')) 
     subparsers = parser.add_subparsers(title='子命令', dest='function')
 
-    make_ragne = subparsers.add_parser('make_ragne', help='根据手机号段生成手机号码', description=textwrap.dedent('''根据手机号段生成手机号码'''),
-                                    epilog=textwrap.dedent(
-                                        '''
+    make_ragne = subparsers.add_parser('make_ragne', 
+                                    help='根据手机号段生成手机号码', 
+                                    description=textwrap.dedent('''根据手机号段生成手机号码'''),
+                                    epilog=textwrap.dedent('''
                                         
                                         use: ./mng make_ragne -r 139 -p ../data
                                         out: ../data/139.csv
 
-                                        '''
-                                    ), formatter_class=argparse.RawTextHelpFormatter)
+                                    '''), 
+                                    formatter_class=argparse.RawTextHelpFormatter)
     make_ragne.add_argument('-r', '--range', metavar="range", dest="range", type=int, action='store', help='手机号段前3位，如133')
     make_ragne.add_argument('-p', '--path', metavar="path", dest="path", type=str, action='store', help="生成文件的保存路径")
+
+    make_random = subparsers.add_parser('make_random', 
+                                    help='随机排序已生成的手机号码', 
+                                    description=textwrap.dedent('''随机排序已生成的手机号码'''),
+                                    epilog=textwrap.dedent('''
+                                        use: ./mng make_random -f ../data/134.csv
+                                    '''),
+                                    formatter_class=argparse.RawTextHelpFormatter)
+    make_random.add_argument('-f', '--file', metavar='file', dest='file', type=str, action='store', help='需要排序的文件路径')
 
     # make_hash = subparsers.add_parser('make_hash', help='生成号码hash值', description=textwrap.dedent('''生成手机号对应的hash值'''),
     #                                    epilog=textwrap.dedent('''
