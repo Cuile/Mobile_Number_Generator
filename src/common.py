@@ -63,21 +63,26 @@ def make_random(path: str):
             # csv_writer.writerow([row])
         print(r) """
 
-        line_no = []
+        rows = []
         for i in range(10):
-            line_no.append(random.randint(a, b))
-        line_no = sorted(set(line_no))
-        print(line_no)
+            line_no = []
+            for i in range(10):
+                line_no.append(random.randint(a, b))
+            line_no = sorted(set(line_no))
+            print(line_no)
+            
+            cli = ''
+            for i in line_no:
+                cli += '-e {}p '.format(i)
+            cli = 'sed -n {} {}'.format(cli, path + '/' + random.choice(csv_files))
+            # print(cli)
+            
+            row = os.popen(cli).read()
+            # print(row)
+            row = row.split('\n')
+            print(row)
+            rows.append(row)
         
-        cli = ''
-        for i in line_no:
-            cli += '-e {}p '.format(i)
-        cli = 'sed -n {} {}'.format(cli, path + '/' + random.choice(csv_files))
-        # print(cli)
-        
-        row = os.popen(cli).read()
-        # print(row)
-        row = row.split('\n')
-        print(row)
-        row = list(filter(None, row))
-        print(row)
+        rows = list(filter(None, row))
+        print(rows)
+        print(len(rows))
