@@ -53,8 +53,8 @@ def make_random(path: str):
     a = 1
     b = 100000000
     with open(path + '/' + 'random.csv', 'a') as t:
-        csv_writer = csv.writer(t)
-        """ for i in range(10):
+        """ csv_writer = csv.writer(t)
+        for i in range(10):
             row = os.popen('sed -n {}p {}'.format(random.randint(a, b), path + '/' + random.choice(csv_files))).read(11)
             if row == '':
                 b -= 1
