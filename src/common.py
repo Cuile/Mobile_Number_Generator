@@ -73,9 +73,11 @@ def make_random(path: str):
         for i in line_no:
             cli += '-e {}p '.format(i)
         cli = 'sed -n {} {}'.format(cli, path + '/' + random.choice(csv_files))
-        print(cli)
+        # print(cli)
         
         row = os.popen(cli).read()
-        print(row)
+        # print(row)
         row = row.split('\n')
+        print(row)
+        row = list(filter(None, row))
         print(row)
