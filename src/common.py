@@ -69,9 +69,9 @@ def make_random(path: str):
         for i in range(1):
             # 随机选择一个文件，从中随机读取random_step个号码
             # 生成随机读取的行数列表
+            print('待处理行号 {}~{}'.format(a, b))
             line_no = []
             for i in range(random_step):
-                print('待处理行号 {}~{}'.format(a, b))
                 line_no.append(random.randint(a, b))
             # 对行数列表去重、排序
             line_no = sorted(set(line_no))
@@ -85,8 +85,8 @@ def make_random(path: str):
                 cli_del += '-e {}d '.format(i)
             cli_sea = 'sed -n {} {}'.format(cli_sea, file)
             cli_del = 'sed -i {} {}'.format(cli_del, file)
-            print(cli_sea)
-            print(cli_del)
+            # print(cli_sea)
+            # print(cli_del)
             # 读取sed命令返回的行
             row = os.popen(cli_sea).read()
             # print(row)
@@ -94,7 +94,7 @@ def make_random(path: str):
             # print(row)
             rows += row
             # 删除sed命令已读取的行
-            os.popen(cli_del)
+            os.popen(cli_del).read()
             # print(os.popen(cli_del).read())
         
         # 删除空元素
@@ -104,6 +104,7 @@ def make_random(path: str):
         # print(rows)
         print('写入随机排序号码 {} 个'.format(len(rows)))
 
-        csv_writer.writerow(rows)
+        for i in rows:
+            csv_writer.writerow(i)
         # 随机行号范围，减去刚处理过的行数
         b -= random_step
