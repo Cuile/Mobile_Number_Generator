@@ -82,7 +82,7 @@ def make_random(path: str):
             print(cli_sea)
             print(cli_del)
             
-            row = os.popen(cli).read()
+            row = os.popen(cli_sea).read()
             # print(row)
             row = row.split('\n')
             # print(row)
