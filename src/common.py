@@ -82,13 +82,13 @@ def make_random(path: str):
                 cli_del = 'sed -i {} {}'.format(cli_del, file)
                 # 读取sed命令返回的行
                 row = os.popen(cli_sea).read()
-                print('读取行\n{}'.format(cli_sea))
+                print('读取行: {}'.format(cli_sea))
                 row = row.split('\n')
                 rows += row
                 # 删除sed命令已读取的行
                 # 运行命令行，必须读返回值，以保证命令运行完成
                 os.popen(cli_del).read()
-                print('删除行\n{}'.format(cli_del))
+                print('删除行: {}'.format(cli_del))
                 # print(os.popen(cli_del).read())
             
             # 删除空元素
