@@ -68,8 +68,12 @@ def make_random(path: str):
             line_no.append(random.randint(a, b))
         line_no = sorted(set(line_no))
         print(line_no)
+        
         cli = ''
         for i in line_no:
             cli += '-e {}p '.format(i)
         cli = 'sed -n {} {}'.format(cli, path + '/' + random.choice(csv_files))
         print(cli)
+        
+        row = os.popen(cli).read(11)
+        print(row)
