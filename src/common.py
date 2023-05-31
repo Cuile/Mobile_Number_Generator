@@ -46,9 +46,12 @@ def make_ragne(r: int, path: str, hash=None):
                 csv_writer.writerow([pn])
 
 # 随机排序已生成的手机号码
-def make_random(file: str):
-    with open(file, 'r') as f:
-        # with open('tmp.csv', 'a') as t:
-        for i in range(600000000):
-            row = os.popen('sed -n {}p {}'.format(random.randint(1, 600000000), file)).read(11)
-            print(row)
+def make_random(path: str):
+    csvfiles = [name for name in os.listdir(path)
+                if name.endswith('.csv')]
+    print(csvfiles)
+    # with open(file, 'r') as f:
+    #     # with open('tmp.csv', 'a') as t:
+    #     for i in range(600000000):
+    #         row = os.popen('sed -n {}p {}'.format(random.randint(1, 600000000), file)).read(11)
+    #         print(row)
