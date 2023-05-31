@@ -83,6 +83,6 @@ def make_random(path: str):
             print(row)
             rows += row
         
-        rows = list(filter(None, row))
+        rows = list(filter(None, rows))
         print(rows)
         print(len(rows))
