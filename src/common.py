@@ -50,5 +50,5 @@ def make_random(file: str):
     with open(file, 'r') as f:
         # with open('tmp.csv', 'a') as t:
         for i in range(600000000):
-            row = os.popen('sed -n {}p {}'.format(random.randint(l, 600000000), file)).read(11)
+            row = os.popen('sed -n {}p {}'.format(random.randint(1, 600000000), file)).read(11)
             print(row)
