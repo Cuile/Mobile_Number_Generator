@@ -49,7 +49,6 @@ def make_ragne(r: int, path: str, hash=None):
 def make_random(file: str):
     with open(file, 'r') as f:
         # with open('tmp.csv', 'a') as t:
-        l = list(range(1, 600000001))
-        for i in l:
-            row = os.popen('sed -n {}p {}'.format(random.choice(l), file)).read(11)
+        for i in range(600000000):
+            row = os.popen('sed -n {}p {}'.format(random.randint(l, 600000000), file)).read(11)
             print(row)
