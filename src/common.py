@@ -49,6 +49,7 @@ def make_ragne(r: int, path: str, hash=None):
 def make_random(path: str):
     csv_files = [name for name in os.listdir(path)
                 if name.endswith('.csv')]
+    r = []
     with open(path + '/' + 'random.csv', 'a') as t:
         csv_writer = csv.writer(t)
         file = path + '/' + random.choice(csv_files)
