@@ -51,7 +51,7 @@ def make_random(path: str):
                 if name.endswith('.csv')]
     r = []
     a = 1
-    b = 1000000
+    b = 100000000
     with open(path + '/' + 'random.csv', 'a') as t:
         csv_writer = csv.writer(t)
         for i in range(10):
