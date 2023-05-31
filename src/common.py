@@ -50,4 +50,7 @@ def make_random(file: str):
     # with open(file, 'r') as f:
         # with open('tmp.csv', 'a') as t:
     row = linecache.getline(file, 10)
-    print(row)
+    if row == '':
+        print('getline error')
+    else:
+        print(row)
