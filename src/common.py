@@ -54,4 +54,4 @@ def make_random(path: str):
         for i in range(600000000):
             row = os.popen('sed -n {}p {}'.format(random.randint(1, 100000000), path + '/' + random.choice(csvfiles))).read(11)
             print(row)
-            csv_writer.writerow(str(row))
+            csv_writer.writerow([row])
