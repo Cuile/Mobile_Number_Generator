@@ -76,4 +76,4 @@ def make_random(path: str):
         print(cli)
         
         row = os.popen(cli).read()
-        print(row)
+        print(type(row))
