@@ -50,8 +50,8 @@ def make_random(path: str):
     csvfiles = [name for name in os.listdir(path)
                 if name.endswith('.csv')]
     with open(path + '/' + 'random.csv', 'a') as t:
+        csv_writer = csv.writer(t)
         for i in range(600000000):
-            file = path + '/' + random.choice(csvfiles)
-            row = os.popen('sed -n {}p {}'.format(random.randint(1, 100000000), file)).read(11)
+            row = os.popen('sed -n {}p {}'.format(random.randint(1, 100000000), path + '/' + random.choice(csvfiles))).read(11)
             print(row)
-            t.write(row)
+            csv_writer.writerow(row)
