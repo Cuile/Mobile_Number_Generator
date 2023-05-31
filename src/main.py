@@ -106,7 +106,7 @@ if __name__ == '__main__':
                                     help='随机排序已生成的手机号码', 
                                     description=textwrap.dedent('''随机排序已生成的手机号码'''),
                                     epilog=textwrap.dedent('''
-                                        use: ./mng make_random -p ../data/
+                                        use: ./mng make_random -p ../data
                                         out: ../data/random.csv
                                     '''),
                                     formatter_class=argparse.RawTextHelpFormatter)
