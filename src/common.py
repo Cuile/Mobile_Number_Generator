@@ -49,11 +49,9 @@ def make_ragne(r: int, path: str, hash=None):
 def make_random(path: str):
     csvfiles = [name for name in os.listdir(path)
                 if name.endswith('.csv')]
-    # for fp in csvfiles:
-    #     csvfp.append = open(path + '/' + fp, 'r')
-    for i in range(600000000):
-        file = path + '/' + random.choice(csvfiles)
-        # with open(file, 'r') as f:
-        # with open('tmp.csv', 'a') as t:
-        row = os.popen('sed -n {}p {}'.format(random.randint(1, 100000000), file)).read(11)
-        print(row)
+    with open('tmp.csv', 'a') as t:
+        for i in range(600000000):
+            file = path + '/' + random.choice(csvfiles)
+            row = os.popen('sed -n {}p {}'.format(random.randint(1, 100000000), file)).read(11)
+            print(row)
+            t.write(t)
