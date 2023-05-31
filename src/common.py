@@ -81,7 +81,7 @@ def make_random(path: str):
             # print(row)
             row = row.split('\n')
             print(row)
-            rows.append(row)
+            rows += row
         
         rows = list(filter(None, row))
         print(rows)
