@@ -48,7 +48,7 @@ def make_ragne(r: int, path: str, hash=None):
 def make_random(file: str):
     with open(file, 'r') as f:
         # with open('tmp.csv', 'a') as t:
-        row = f.readline()
+        row = 1
         while row != '':
-            print(row)
             row = f.readline()
+            print(row)
