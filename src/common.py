@@ -49,7 +49,7 @@ def make_ragne(r: int, path: str, hash=None):
 def make_random(path: str):
     csvfiles = [name for name in os.listdir(path)
                 if name.endswith('.csv')]
-    with open('tmp.csv', 'a') as t:
+    with open('random.csv', 'a') as t:
         for i in range(600000000):
             file = path + '/' + random.choice(csvfiles)
             row = os.popen('sed -n {}p {}'.format(random.randint(1, 100000000), file)).read(11)
