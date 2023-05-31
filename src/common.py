@@ -65,11 +65,12 @@ def make_random(path: str):
 
         rows = []
         for i in range(10):
+            
             line_no = []
             for i in range(10):
                 line_no.append(random.randint(a, b))
             line_no = sorted(set(line_no))
-            print(line_no)
+            # print(line_no)
             
             cli_sea = ''
             cli_del = ''
@@ -88,6 +89,7 @@ def make_random(path: str):
             # print(row)
             rows += row
         
-        rows = random.shuffle(list(filter(None, rows)))
+        rows = list(filter(None, rows))
+        random.shuffle(rows)
         print(rows)
         print(len(rows))
