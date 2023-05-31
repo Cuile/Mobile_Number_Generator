@@ -3,6 +3,7 @@ import time
 import hashlib
 import csv
 import os
+import random
 
 
 # 计时函数
