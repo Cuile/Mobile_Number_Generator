@@ -48,6 +48,6 @@ def make_ragne(r: int, path: str, hash=None):
 def make_random(file: str):
     with open(file, 'r') as f:
         # with open('tmp.csv', 'a') as t:
-        for i in range(600000000):
+        for i in random.shuffle(range(600000000)):
             row = os.popen('sed -n {}p {}'.format(i, file)).read(11)
             print(row)
