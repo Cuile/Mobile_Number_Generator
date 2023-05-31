@@ -46,9 +46,8 @@ def make_ragne(r: int, path: str, hash=None):
 
 # 随机排序已生成的手机号码
 def make_random(file: str):
-    with open(file, 'r') as f:
+    # with open(file, 'r') as f:
         # with open('tmp.csv', 'a') as t:
-        row = 1
-        while row != '':
-            row = f.readline()
-            print(row)
+        # while row != '':
+    row = os.popen('sed -n {}p {}'.format(10, file)).read()
+    print(row)
