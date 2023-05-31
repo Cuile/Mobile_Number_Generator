@@ -52,6 +52,8 @@ def make_random(path: str):
     r = []
     a = 1
     b = 100000000
+    # 每次随机读取的号码个数
+    random_step = 10
     with open(path + '/' + 'random.out', 'a') as t:
         """ csv_writer = csv.writer(t)
         for i in range(10):
@@ -65,9 +67,9 @@ def make_random(path: str):
 
         rows = []
         for i in range(10):
-            
+            # 随机选择一个文件，从中随机读取random_step个号码
             line_no = []
-            for i in range(10):
+            for i in range(random_step):
                 line_no.append(random.randint(a, b))
             line_no = sorted(set(line_no))
             # print(line_no)
@@ -82,14 +84,18 @@ def make_random(path: str):
             cli_del = 'sed -i {} {}'.format(cli_del, file)
             print(cli_sea)
             print(cli_del)
-            
+            # 读取sed命令返回的行
             row = os.popen(cli_sea).read()
             # print(row)
             row = row.split('\n')
             # print(row)
             rows += row
+            # 删除sed命令已读取的行
+            print(os.popen(cli_del).read())
         
+        # 删除空元素
         rows = list(filter(None, rows))
+        # 随机排序rows
         random.shuffle(rows)
         print(rows)
         print(len(rows))
