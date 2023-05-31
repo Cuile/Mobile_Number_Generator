@@ -50,11 +50,15 @@ def make_random(path: str):
     csv_files = [name for name in os.listdir(path)
                 if name.endswith('.csv')]
     r = []
+    a = 1
+    b = 1000000
     with open(path + '/' + 'random.csv', 'a') as t:
         csv_writer = csv.writer(t)
-        file = path + '/' + random.choice(csv_files)
         for i in range(10):
-            row = os.popen('sed -n {}p {}'.format(random.randint(1, 100000), path + '/' + random.choice(csv_files))).read(11)
-            r.append(row)
+            row = os.popen('sed -n {}p {}'.format(random.randint(a, b), path + '/' + random.choice(csv_files))).read(11)
+            if row == '':
+                b -= 1
+            else:
+                r.append(row)
             # csv_writer.writerow([row])
         print(r)
