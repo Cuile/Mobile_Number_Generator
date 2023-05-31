@@ -50,6 +50,16 @@ def make_random(path: str):
     csvfiles = [name for name in os.listdir(path)
                 if name.endswith('.csv')]
     print(csvfiles)
+    print(random.choice(csvfiles))
+    print(random.choice(csvfiles))
+    print(random.choice(csvfiles))
+    print(random.choice(csvfiles))
+    print(random.choice(csvfiles))
+    print(random.choice(csvfiles))
+    print(random.choice(csvfiles))
+    print(random.choice(csvfiles))
+    print(random.choice(csvfiles))
+    print(random.choice(csvfiles))
     # with open(file, 'r') as f:
     #     # with open('tmp.csv', 'a') as t:
     #     for i in range(600000000):
