@@ -66,11 +66,13 @@ def make_random(path: str):
         print(r) """
 
         rows = []
-        for i in range(10):
+        for i in range(1):
             # 随机选择一个文件，从中随机读取random_step个号码
+            # 生成随机读取的行数列表
             line_no = []
             for i in range(random_step):
                 line_no.append(random.randint(a, b))
+            # 对行数列表去重、排序
             line_no = sorted(set(line_no))
             # print(line_no)
             
