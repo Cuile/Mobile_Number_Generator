@@ -54,11 +54,17 @@ def make_random(path: str):
     b = 100000000
     with open(path + '/' + 'random.csv', 'a') as t:
         csv_writer = csv.writer(t)
-        for i in range(10):
+        """ for i in range(10):
             row = os.popen('sed -n {}p {}'.format(random.randint(a, b), path + '/' + random.choice(csv_files))).read(11)
             if row == '':
                 b -= 1
             else:
                 r.append(row)
             # csv_writer.writerow([row])
-        print(r)
+        print(r) """
+
+        line_no = []
+        for i in range(10):
+            line_no.append(random.randint(a, b))
+        print(line_no)
+        print(sorted(set(line_no)))
