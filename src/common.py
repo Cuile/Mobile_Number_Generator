@@ -71,18 +71,23 @@ def make_random(path: str):
             line_no = sorted(set(line_no))
             print(line_no)
             
-            cli = ''
+            cli_sea = ''
+            cli_del = ''
+            file = path + '/' + random.choice(csv_files)
             for i in line_no:
-                cli += '-e {}p '.format(i)
-            cli = 'sed -n {} {}'.format(cli, path + '/' + random.choice(csv_files))
-            # print(cli)
+                cli_sea += '-e {}p '.format(i)
+                cli_del += '-e {}d '.format(i)
+            cli_sea = 'sed -n {} {}'.format(cli_sea, file)
+            cli_del = 'sed -i {} {}'.format(cli_del, file)
+            print(cli_sea)
+            print(cli_del)
             
             row = os.popen(cli).read()
             # print(row)
             row = row.split('\n')
-            print(row)
+            # print(row)
             rows += row
         
-        rows = list(filter(None, rows))
+        rows = random.shuffle(list(filter(None, rows)))
         print(rows)
         print(len(rows))
