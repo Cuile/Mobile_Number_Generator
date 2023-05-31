@@ -50,19 +50,19 @@ def make_random(path: str):
     csv_files = [name for name in os.listdir(path)
                 if name.endswith('.csv')]
     r = []
+    # 随机行号生成范围
     a = 1
     b = 100000000
     # 每次随机读取的号码个数
     random_step = 10
     with open(path + '/' + 'random.out', 'a') as t:
-        """ csv_writer = csv.writer(t)
-        for i in range(10):
+        csv_writer = csv.writer(t)
+        """ for i in range(10):
             row = os.popen('sed -n {}p {}'.format(random.randint(a, b), path + '/' + random.choice(csv_files))).read(11)
             if row == '':
                 b -= 1
             else:
                 r.append(row)
-            # csv_writer.writerow([row])
         print(r) """
 
         rows = []
@@ -71,6 +71,7 @@ def make_random(path: str):
             # 生成随机读取的行数列表
             line_no = []
             for i in range(random_step):
+                print('待处理行号 {}~{}'.format(a, b))
                 line_no.append(random.randint(a, b))
             # 对行数列表去重、排序
             line_no = sorted(set(line_no))
@@ -93,11 +94,16 @@ def make_random(path: str):
             # print(row)
             rows += row
             # 删除sed命令已读取的行
-            print(os.popen(cli_del).read())
+            os.popen(cli_del)
+            # print(os.popen(cli_del).read())
         
         # 删除空元素
         rows = list(filter(None, rows))
         # 随机排序rows
         random.shuffle(rows)
-        print(rows)
-        print(len(rows))
+        # print(rows)
+        print('写入随机排序号码 {} 个'.format(len(rows)))
+
+        csv_writer.writerow(rows)
+        # 随机行号范围，减去刚处理过的行数
+        b -= random_step
