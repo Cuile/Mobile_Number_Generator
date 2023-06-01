@@ -58,9 +58,6 @@ def make_random(path: str):
     rows = [0]
     i = 0
     # 生成输出文件
-    
-    print(i)
-    
     with open(path + '/' + 'random.out', 'a') as t:
         csv_writer = csv.writer(t)
         while len(rows) != 0:
