@@ -62,23 +62,24 @@ def make_random(path: str):
                 cli_sea = ''
                 cli_del = ''
                 for i in line_no:
-                    cli_sea = 'sed -e\'{}q;d\' {}'.format(i, file)
-                    # os.popen是非阻塞的，为保证命令运行完成，必须使用read()或readlines()产生阻塞效果
-                    # 读取sed命令返回的行
-                    # print('读取行：{}'.format(cli_sea))
-                    with os.popen(cli_sea, 'r') as p:
-                        row = p.readlines()
-                    rows += row
+                    cli_sea += '-e {}p '.format(i)
                     cli_del += '-e {}d '.format(i)
+                cli_sea = 'sed -n {} {}'.format(cli_sea, file)
+                cli_del = 'sed -i {} {}'.format(cli_del, file)
+                
+                # os.popen是非阻塞的，为保证命令运行完成，必须使用read()或readlines()产生阻塞效果
+                # 读取sed命令返回的行
+                with os.popen(cli_sea, 'r') as p:
+                    row = p.readlines()
+                rows += row
                 print('读取行完成')
+                # print('读取行：{}'.format(cli_sea))
                 
                 # 删除sed命令已读取的行
-                cli_del = 'sed -i {} {}'.format(cli_del, file)
                 with os.popen(cli_del, 'r') as p:
                     p.readlines()
                 print('删除行完成')
                 # print('删除行：{}'.format(cli_del))
-                # print(os.popen(cli_del).read())
             
             # 删除空元素
             rows = list(filter(None, rows))
