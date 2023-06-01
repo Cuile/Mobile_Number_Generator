@@ -56,14 +56,14 @@ def make_random(path: str):
     # 每次随机读取的号码个数
     random_step = 1000
     rows = [0]
-    i = 0
     # 生成输出文件
     with open(path + '/' + 'random.out', 'a') as t:
         csv_writer = csv.writer(t)
         while len(rows) != 0:
             rows = []
             print('待处理行号 {}~{}'.format(a, b))
-            for i in range(1):
+            # 每次处理的文件数量
+            for f in range(1):
                 
                 # 随机选择一个文件，从中随机读取random_step个号码
                 file = path + '/' + random.choice(csv_files)
@@ -78,6 +78,7 @@ def make_random(path: str):
                 print(line_no)
                 
                 # 读取文件，找到line_no包含的行号
+                i = 0
                 with open(file) as f_read:
                     for line in f_read:
                         i += 1
