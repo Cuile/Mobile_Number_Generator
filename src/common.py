@@ -28,17 +28,29 @@ def make_ragne(r: int, path: str, hash=None):
                 pn = str(i)
                 csv_writer.writerow([pn])
 
+# 生成随机行号集合
+def get_random_lineno(a: int, b: int, step: int):
+    # 生成随机读取的行数列表
+    line_no = []
+    for i in range(step):
+        line_no.append(random.randint(a, b))
+    # 对行数列表去重
+    # print(line_no)
+    return set(line_no)
+
 # 随机排序已生成的手机号码
 def make_random(path: str):
     # 读取路径下的所有CSV文件名
     csv_files = [name for name in os.listdir(path)
                 if name.endswith('.csv')]
+    
     # 随机行号生成范围
     a = 1
     b = 100000000
     # 每次随机读取的号码个数
-    random_step = 1000
+    step = 1000
     rows = [0]
+    
     # 生成输出文件
     with open(path + '/random.out', 'a') as out:
         while len(rows) != 0:
@@ -47,13 +59,7 @@ def make_random(path: str):
             
             for f in csv_files:
                 
-                # 生成随机读取的行数列表
-                line_no = []
-                for i in range(random_step):
-                    line_no.append(random.randint(a, b))
-                # 对行数列表去重
-                line_no = set(line_no)
-                # print(line_no)
+                line_no = get_random_lineno(a, b, step)
                 
                 # 随机选择一个文件，从中随机读取random_step个号码
                 file = path + '/' + random.choice(csv_files)
@@ -85,7 +91,7 @@ def make_random(path: str):
             print('写入随机排序号码 {} 个'.format(len(rows)))
             
             # 随机行号范围，减去刚处理过的行数
-            b -= random_step
+            b -= step
             print(15 * '=')
             
             # 测试时使用，保证while只循环一次
