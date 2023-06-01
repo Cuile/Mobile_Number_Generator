@@ -67,16 +67,18 @@ def make_random(path: str):
                 cli_sea = 'sed -n {} {}'.format(cli_sea, file)
                 cli_del = 'sed -i {} {}'.format(cli_del, file)
                 
+                # os.popen是非阻塞的，为保证命令运行完成，必须使用read()或readlines()产生阻塞效果
                 # 读取sed命令返回的行
-                row = os.popen(cli_sea).read()
+                with os.popen(cli_sea, 'r') as p:
+                    row = p.readlines()
                 print('读取行完成')
                 # print('读取行：{}'.format(cli_sea))
-                row = row.split('\n')
+                # row = row.split('\n')
                 rows += row
                 
                 # 删除sed命令已读取的行
-                # 运行命令行，必须读返回值，以保证命令运行完成
-                os.popen(cli_del).read()
+                with os.popen(cli_del, 'r') as p:
+                    p.readlines()
                 print('删除行完成')
                 # print('删除行：{}'.format(cli_del))
                 # print(os.popen(cli_del).read())
