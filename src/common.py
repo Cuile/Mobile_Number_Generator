@@ -48,7 +48,7 @@ def make_random(path: str):
     a = 1
     b = 100000000
     # 每次随机读取的号码个数
-    step = 10000
+    step = 100000
     rows = [0]
     
     # 生成输出文件
