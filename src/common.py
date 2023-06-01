@@ -56,15 +56,8 @@ def make_random(path: str):
     # 每次随机读取的号码个数
     random_step = 1000
     rows = [0]
-    # 读取文件速度测试
-    file = path + '/' + random.choice(csv_files)
-    i = 0
-    with open(file) as f_read:
-        for line in f_read:
-            i += 1
-    print(i)
     # 生成输出文件
-    """ with open(path + '/' + 'random.out', 'a') as t:
+    with open(path + '/' + 'random.out', 'a') as t:
         csv_writer = csv.writer(t)
         while len(rows) != 0:
             rows = []
@@ -112,4 +105,4 @@ def make_random(path: str):
             print('写入随机排序号码 {} 个'.format(len(rows)))
             # 随机行号范围，减去刚处理过的行数
             b -= random_step
-            print(15 * '=') """
+            print(15 * '=')
