@@ -59,40 +59,40 @@ def make_random(path: str):
     # 生成输出文件
     with open(path + '/' + 'random.out', 'a') as t:
         csv_writer = csv.writer(t)
-        while len(rows) != 0:
-            rows = []
-            print('待处理行号 {}~{}'.format(a, b))
-            # 每次处理的文件数量
-            for f in range(1):
-                
-                # 随机选择一个文件，从中随机读取random_step个号码
-                file = path + '/' + random.choice(csv_files)
-                print('处理文件：{}'.format(file))
-                
-                # 生成随机读取的行数列表
-                line_no = []
-                for i in range(random_step):
-                    line_no.append(random.randint(a, b))
-                # 对行数列表去重
-                line_no = set(line_no)
-                print(line_no)
-                
-                # 读取文件，找到line_no包含的行号
-                i = 0
-                with open(file) as f_read:
-                    for line in f_read:
-                        i += 1
-                        if i in line_no:
-                            rows.append(line)
-                    print('读取行完成')
+        # while len(rows) != 0:
+        rows = []
+        print('待处理行号 {}~{}'.format(a, b))
+        # 每次处理的文件数量
+        for f in range(1):
             
-            # 随机排序rows
-            random.shuffle(rows)
-            print(rows)
+            # 随机选择一个文件，从中随机读取random_step个号码
+            file = path + '/' + random.choice(csv_files)
+            print('处理文件：{}'.format(file))
+            
+            # 生成随机读取的行数列表
+            line_no = []
+            for i in range(random_step):
+                line_no.append(random.randint(a, b))
+            # 对行数列表去重
+            line_no = set(line_no)
+            print(line_no)
+            
+            # 读取文件，找到line_no包含的行号
+            i = 0
+            with open(file) as f_read:
+                for line in f_read:
+                    i += 1
+                    if i in line_no:
+                        rows.append(line)
+                print('读取行完成')
+        
+        # 随机排序rows
+        random.shuffle(rows)
+        print(rows)
 
-            for i in rows:
-                csv_writer.writerow([i])
-            print('写入随机排序号码 {} 个'.format(len(rows)))
-            # 随机行号范围，减去刚处理过的行数
-            b -= random_step
-            print(15 * '=')
+        for i in rows:
+            csv_writer.writerow([i])
+        print('写入随机排序号码 {} 个'.format(len(rows)))
+        # 随机行号范围，减去刚处理过的行数
+        b -= random_step
+        print(15 * '=')
