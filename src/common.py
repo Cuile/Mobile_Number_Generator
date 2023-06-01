@@ -65,7 +65,7 @@ def make_random(path: str):
                     cli_sea = 'sed -e\'{}q;d\' {}'.format(i, file)
                     # os.popen是非阻塞的，为保证命令运行完成，必须使用read()或readlines()产生阻塞效果
                     # 读取sed命令返回的行
-                    print('读取行：{}'.format(cli_sea))
+                    # print('读取行：{}'.format(cli_sea))
                     with os.popen(cli_sea, 'r') as p:
                         row = p.readlines()
                     rows += row
