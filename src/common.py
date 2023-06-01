@@ -57,7 +57,7 @@ def make_random(path: str):
     random_step = 1000
     rows = [0]
     # 生成输出文件
-    with open(path + '/' + 'random.out', 'a') as t:
+    with open(path + '/random.out', 'a') as out:
         # csv_writer = csv.writer(t)
         # while len(rows) != 0:
         rows = []
@@ -79,20 +79,23 @@ def make_random(path: str):
             
             # 读取文件，找到line_no包含的行号
             i = 0
-            with open(file) as f_read:
-                for line in f_read:
-                    i += 1
-                    if i in line_no:
-                        rows.append(line)
+            tmp = []
+            with open(file, 'r') as f_read:
+                # 使用临时文件，保存未选中的行
+                with open(path + '/tmp', 'a') as tmp_csv:
+                    for line in f_read:
+                        i += 1
+                        if i in line_no:
+                            rows.append(line)
+                        else:
+                            tmp_csv.write(line)
                 print('读取行完成')
         
         # 随机排序rows
         random.shuffle(rows)
         # print(rows)
-
-        # for i in rows:
-            # csv_writer.writerow([i])
-        t.writelines(rows)
+        # 写入输出文件
+        out.writelines(rows)
         print('写入随机排序号码 {} 个'.format(len(rows)))
         # 随机行号范围，减去刚处理过的行数
         b -= random_step
