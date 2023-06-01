@@ -75,7 +75,7 @@ def make_random(path: str):
                 line_no.append(random.randint(a, b))
             # 对行数列表去重
             line_no = set(line_no)
-            print(line_no)
+            # print(line_no)
             
             # 读取文件，找到line_no包含的行号
             i = 0
@@ -88,7 +88,7 @@ def make_random(path: str):
         
         # 随机排序rows
         random.shuffle(rows)
-        print(rows)
+        # print(rows)
 
         # for i in rows:
             # csv_writer.writerow([i])
