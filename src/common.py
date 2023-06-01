@@ -62,7 +62,6 @@ def make_random(path: str):
                 # 读取文件，找到line_no包含的行号
                 # 使用临时文件，保存未选中的行
                 i = 0
-                tmp = []
                 with open(file, 'r') as f_read:
                     with open(path + '/tmp', 'a') as tmp_csv:
                         for line in f_read:
@@ -71,9 +70,11 @@ def make_random(path: str):
                                 rows.append(line)
                             else:
                                 tmp_csv.write(line)
-                    print('读取行完成')
+                print('读取行完成')
+                
                 # 使用tmp_csv替换file
-                os.popen('rm -f {} && mv {} {}'.format(file, path + '/tmp', file)).read()
+                with os.popen('rm -f {} && mv {} {}'.format(file, path + '/tmp', file), 'r') as p:
+                    p.read()
             
             # 随机排序rows
             random.shuffle(rows)
