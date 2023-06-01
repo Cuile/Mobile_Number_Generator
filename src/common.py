@@ -56,60 +56,45 @@ def make_random(path: str):
     # 每次随机读取的号码个数
     random_step = 1000
     rows = [0]
-    # 读取文件速度测试
-    file = path + '/' + random.choice(csv_files)
     i = 0
-    with open(file) as f_read:
-        for line in f_read:
-            i += 1
-    print(i)
     # 生成输出文件
-    """ with open(path + '/' + 'random.out', 'a') as t:
+    
+    print(i)
+    
+    with open(path + '/' + 'random.out', 'a') as t:
         csv_writer = csv.writer(t)
         while len(rows) != 0:
             rows = []
             print('待处理行号 {}~{}'.format(a, b))
             for i in range(10):
+                
                 # 随机选择一个文件，从中随机读取random_step个号码
+                file = path + '/' + random.choice(csv_files)
+                print('处理文件：{}'.format(file))
+                
                 # 生成随机读取的行数列表
                 line_no = []
                 for i in range(random_step):
                     line_no.append(random.randint(a, b))
-                # 对行数列表去重、排序
-                line_no = sorted(set(line_no))
-                # print(line_no)
-                # 生成sed命令，读取、删除行
-                cli_sea = ''
-                cli_del = ''
-                file = path + '/' + random.choice(csv_files)
-                print('处理文件：{}'.format(file))
-                for i in line_no:
-                    cli_sea += '-e {}p '.format(i)
-                    cli_del += '-e {}d '.format(i)
-                cli_sea = 'sed -n {} {}'.format(cli_sea, file)
-                cli_del = 'sed -i {} {}'.format(cli_del, file)
-                # 读取sed命令返回的行
-                row = os.popen(cli_sea).read()
-                print('读取行完成')
-                # print('读取行：{}'.format(cli_sea))
-                row = row.split('\n')
-                rows += row
-                # 删除sed命令已读取的行
-                # 运行命令行，必须读返回值，以保证命令运行完成
-                os.popen(cli_del).read()
-                print('删除行完成')
-                # print('删除行：{}'.format(cli_del))
-                # print(os.popen(cli_del).read())
+                # 对行数列表去重
+                line_no = set(line_no)
+                print(line_no)
+                
+                # 读取文件，找到line_no包含的行号
+                with open(file) as f_read:
+                    for line in f_read:
+                        i += 1
+                        if i in line_no:
+                            rows.append(line)
+                    print('读取行完成')
             
-            # 删除空元素
-            rows = list(filter(None, rows))
             # 随机排序rows
             random.shuffle(rows)
-            # print(rows)
+            print(rows)
 
             for i in rows:
                 csv_writer.writerow([i])
             print('写入随机排序号码 {} 个'.format(len(rows)))
             # 随机行号范围，减去刚处理过的行数
             b -= random_step
-            print(15 * '=') """
+            print(15 * '=')
