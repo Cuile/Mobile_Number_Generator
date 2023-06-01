@@ -95,6 +95,6 @@ def make_random(path: str):
             print(15 * '=')
             
             # 测试时使用，保证while只循环一次
-            rows = []
+            # rows = []
         else:
             print('号码合并随机排序完成')
