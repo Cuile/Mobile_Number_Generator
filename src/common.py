@@ -58,12 +58,12 @@ def make_random(path: str):
     rows = [0]
     # 生成输出文件
     with open(path + '/' + 'random.out', 'a') as t:
-        csv_writer = csv.writer(t)
+        # csv_writer = csv.writer(t)
         # while len(rows) != 0:
         rows = []
         print('待处理行号 {}~{}'.format(a, b))
-        # 每次处理的文件数量
-        for f in range(1):
+        
+        for f in len(csv_files):
             
             # 随机选择一个文件，从中随机读取random_step个号码
             file = path + '/' + random.choice(csv_files)
@@ -90,8 +90,9 @@ def make_random(path: str):
         random.shuffle(rows)
         print(rows)
 
-        for i in rows:
-            csv_writer.writerow([i])
+        # for i in rows:
+            # csv_writer.writerow([i])
+        t.write('\n'.join(rows))
         print('写入随机排序号码 {} 个'.format(len(rows)))
         # 随机行号范围，减去刚处理过的行数
         b -= random_step
