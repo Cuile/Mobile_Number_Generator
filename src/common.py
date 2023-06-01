@@ -87,11 +87,13 @@ def make_random(path: str):
             random.shuffle(rows)
             # print(rows)
             # 写入输出文件
-            out.writelines(rows)
+            out.writelines('\n'.join(rows))
             out.flush()
             print('写入随机排序号码 {} 个'.format(len(rows)))
             # 随机行号范围，减去刚处理过的行数
             b -= random_step
             print(15 * '=')
+            # 测试时使用，保证while只循环一次
+            rows = []
         else:
             print('号码合并随机排序完成')
