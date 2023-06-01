@@ -92,7 +92,7 @@ def make_random(path: str):
 
         # for i in rows:
             # csv_writer.writerow([i])
-        t.write('\n'.join(rows))
+        t.writelines(rows)
         print('写入随机排序号码 {} 个'.format(len(rows)))
         # 随机行号范围，减去刚处理过的行数
         b -= random_step
