@@ -58,16 +58,11 @@ def make_random(path: str):
     rows = [0]
     # 生成输出文件
     with open(path + '/random.out', 'a') as out:
-        # csv_writer = csv.writer(t)
         # while len(rows) != 0:
         rows = []
         print('待处理行号 {}~{}'.format(a, b))
         
         for f in csv_files:
-            
-            # 随机选择一个文件，从中随机读取random_step个号码
-            file = path + '/' + random.choice(csv_files)
-            print('处理文件：{}'.format(file))
             
             # 生成随机读取的行数列表
             line_no = []
@@ -77,11 +72,15 @@ def make_random(path: str):
             line_no = set(line_no)
             # print(line_no)
             
+            # 随机选择一个文件，从中随机读取random_step个号码
+            file = path + '/' + random.choice(csv_files)
+            print('处理文件：{}'.format(file))
+
             # 读取文件，找到line_no包含的行号
+            # 使用临时文件，保存未选中的行
             i = 0
             tmp = []
             with open(file, 'r') as f_read:
-                # 使用临时文件，保存未选中的行
                 with open(path + '/tmp', 'a') as tmp_csv:
                     for line in f_read:
                         i += 1
@@ -90,6 +89,8 @@ def make_random(path: str):
                         else:
                             tmp_csv.write(line)
                 print('读取行完成')
+            # 使用tmp_csv替换file
+            os.popen('rm -f {} && mv {} {}'.format(file, path + '/tmp', file)).read()
         
         # 随机排序rows
         random.shuffle(rows)
