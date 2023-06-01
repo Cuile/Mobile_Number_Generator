@@ -97,6 +97,7 @@ def make_random(path: str):
             # print(rows)
             # 写入输出文件
             out.writelines(rows)
+            out.flush()
             print('写入随机排序号码 {} 个'.format(len(rows)))
             # 随机行号范围，减去刚处理过的行数
             b -= random_step
