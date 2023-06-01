@@ -63,7 +63,7 @@ def make_random(path: str):
         rows = []
         print('待处理行号 {}~{}'.format(a, b))
         
-        for f in len(csv_files):
+        for f in csv_files:
             
             # 随机选择一个文件，从中随机读取random_step个号码
             file = path + '/' + random.choice(csv_files)
