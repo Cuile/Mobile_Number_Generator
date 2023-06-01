@@ -6,8 +6,9 @@ import textwrap
 import check_sum
 import common
 
+import cProfile
+
 def main():
-    common.timing_starts()
     try:
         if args.function == 'make_ragne':
             if not args.path:
@@ -20,7 +21,7 @@ def main():
             if not args.path:
                 raise RuntimeError('-p 参数未指定')
             else:
-                common.make_random(args.path)
+                cProfile.run('common.make_random(args.path)')
         # 以下代码未做调试        
         elif args.function == 'make_hash':
             if not args.path:
@@ -84,8 +85,6 @@ def main():
             {err}
             usage: -h or --help arguments show help message
             '''.format(err=err)))
-
-    common.timing_ends()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=textwrap.dedent('''生成手机号和对应的校验码''')) 
