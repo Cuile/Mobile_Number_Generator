@@ -66,7 +66,7 @@ def get_random_line(file: str, line_no: set):
     return rows
 
 # 读取路径下的所有CSV文件名
-def get_random_file(path: str):
+def get_random_files(path: str):
     # csv_files = [name for name in os.listdir(path)
     #             if name.endswith('.csv')]
     with os.popen('wc -l ' + path + '/*.csv') as p:
@@ -74,17 +74,13 @@ def get_random_file(path: str):
     files = files.splitlines()
     files.pop()
     # print(files)
-    a = []
-    b = []
+    csv_lineno = []
+    csv_files = []
     for i in files:
         t = i.strip().split(' ')
-        print(t)
-        a.append(t[0])
-        b.append(t[1])
-    print(a)
-    print(b)
-    print(dict(zip(b, a)))
-
+        csv_lineno.append(t[0])
+        csv_files.append(t[1])
+    reutn csv_files, max(csv_lineno)
 
 # 随机排序已生成的手机号码
 def make_random(path: str):
@@ -94,15 +90,13 @@ def make_random(path: str):
         while len(rows) != 0:
             rows = []
 
-            csv_files = get_random_file(path)
+            # csv_files, max_lineno = get_random_files(path)
+            print(get_random_files(path))
             
-            """ # 随机行号生成范围
-            a = 1
-            b = 10
             # 每次随机读取的号码个数
             step = 10
-            print('待处理行号 {}~{}'.format(a, b))
-            
+            print('待处理行号 {}~{}'.format(1, max_lineno))
+            """ 
             for f in csv_files:
                 # 随机选择一个文件，从中随机读取random_step个号码
                 # file = path + '/' + random.choice(csv_files)
