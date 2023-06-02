@@ -95,10 +95,10 @@ def make_random(path: str):
             # print(get_random_files(path))
             
             # 每次随机读取的号码个数
-            print('待处理行号 {}~{}'.format(1, max_lineno))
-            if (step <= int(max_lineno)):
-                step /= 10
-            print(step)
+            if (step > int(max_lineno)):
+                step //= 10
+            print('待处理行号 {}~{}，本次处理 {} 个'.format(1, max_lineno, step))
+
             for f in csv_files:
                 # 随机选择一个文件，从中随机读取random_step个号码
                 # file = path + '/' + random.choice(csv_files)
