@@ -66,7 +66,9 @@ def make_random(path: str):
                 line_no = get_random_lineno(a, b, step)
                 
                 # 随机选择一个文件，从中随机读取random_step个号码
-                file = path + '/' + random.choice(csv_files)
+                # file = path + '/' + random.choice(csv_files)
+                # 选择一个文件，从中随机读取random_step个号码
+                file = path + '/' + csv_files
                 print('处理文件：{}'.format(file))
 
                 # 读取文件，找到line_no包含的行号
