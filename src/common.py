@@ -71,7 +71,8 @@ def get_random_file(path: str):
     #             if name.endswith('.csv')]
     with os.popen('wc -l ' + path + '/*.csv') as p:
         files = p.read()
-    # files.pop()
+    files = files.splitlines()
+    files.pop()
     print(files)
     # for i in files:
     #     print(i.split(' '))
