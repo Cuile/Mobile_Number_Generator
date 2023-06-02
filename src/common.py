@@ -69,7 +69,7 @@ def get_random_line(file: str, line_no: set):
 def get_random_file(path: str):
     # csv_files = [name for name in os.listdir(path)
     #             if name.endswith('.csv')]
-    with os.popen('wc -l *.csv') as p:
+    with os.popen('wc -l ' + path + '/*.csv') as p:
         files = p.readlines()
     files.pop()
     print(files)
