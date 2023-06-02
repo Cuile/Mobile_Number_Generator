@@ -50,9 +50,9 @@ def make_random(path: str):
     
     # 随机行号生成范围
     a = 1
-    b = 1000
+    b = 100
     # 每次随机读取的号码个数
-    step = 100
+    step = 10
     rows = [0]
     
     # 生成输出文件
