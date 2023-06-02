@@ -105,7 +105,7 @@ def make_random(path: str):
                 # 选择一个文件，从中随机读取random_step个号码
                 print('处理文件：{}'.format(f))
 
-                line_no = get_random_lineno(1, max_lineno, step)
+                line_no = get_random_lineno(1, int(max_lineno), step)
                 rows = get_random_line(f, line_no, path)
             
             # 随机排序rows
