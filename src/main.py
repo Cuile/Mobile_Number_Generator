@@ -21,7 +21,8 @@ def main():
             if not args.path:
                 raise RuntimeError('-p 参数未指定')
             else:
-                cProfile.run('common.make_random(args.path)', sort = 'cumtime')
+                common.make_random(args.path)
+                # cProfile.run('common.make_random(args.path)', sort = 'cumtime')
         # 以下代码未做调试        
         elif args.function == 'make_hash':
             if not args.path:
