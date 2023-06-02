@@ -70,11 +70,11 @@ def get_random_file(path: str):
     # csv_files = [name for name in os.listdir(path)
     #             if name.endswith('.csv')]
     with os.popen('wc -l ' + path + '/*.csv') as p:
-        files = p.readlines()
-    files.pop()
+        files = p.read()
+    # files.pop()
     print(files)
-    for i in files:
-        print(i.split(' '))
+    # for i in files:
+    #     print(i.split(' '))
 
 
 # 随机排序已生成的手机号码
