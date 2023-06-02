@@ -32,11 +32,15 @@ def make_ragne(r: int, path: str, hash=None):
 def get_random_lineno(a: int, b: int, step: int):
     # 生成随机读取的行数列表
     line_no = []
-    for i in range(step):
-        line_no.append(random.randint(a, b))
-    # 对行数列表去重
-    # print(line_no)
-    return set(line_no)
+    try:
+        for i in range(step):
+            line_no.append(random.randint(a, b))
+        # 对行数列表去重
+        # print(line_no)
+        return set(line_no)
+    except ValueError as err:
+        print('无法生成随机行号集合，请重新设置随机行号范围')
+        return set(line_no)
 
 # 随机排序已生成的手机号码
 def make_random(path: str):
@@ -46,7 +50,7 @@ def make_random(path: str):
     
     # 随机行号生成范围
     a = 1
-    b = 100000000
+    b = 10000000
     # 每次随机读取的号码个数
     step = 1000000
     rows = [0]
