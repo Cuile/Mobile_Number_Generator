@@ -87,25 +87,26 @@ def make_random(path: str):
     # 生成输出文件
     with open(path + '/random.out', 'a') as out:
         rows = [0]
+        step = 1000000
         while len(rows) != 0:
             rows = []
 
-            # csv_files, max_lineno = get_random_files(path)
-            print(get_random_files(path))
+            csv_files, max_lineno = get_random_files(path)
+            # print(get_random_files(path))
             
             # 每次随机读取的号码个数
-            step = 10
             print('待处理行号 {}~{}'.format(1, max_lineno))
-            """ 
+            if (step <= max_lineno):
+                step /= 10
+            print(step)
             for f in csv_files:
                 # 随机选择一个文件，从中随机读取random_step个号码
                 # file = path + '/' + random.choice(csv_files)
                 # 选择一个文件，从中随机读取random_step个号码
-                file = path + '/' + csv_files
-                print('处理文件：{}'.format(file))
+                print('处理文件：{}'.format(f))
 
-                line_no = get_random_lineno(a, b, step)
-                rows = get_random_line(file, line_no)
+                line_no = get_random_lineno(1, max_lineno, step)
+                rows = get_random_line(f, line_no)
             
             # 随机排序rows
             random.shuffle(rows)
@@ -120,6 +121,6 @@ def make_random(path: str):
             print(15 * '=')
             
             # 测试时使用，保证while只循环一次
-            # rows = [] """
+            # rows = []
         else:
             print('号码合并随机排序完成')
