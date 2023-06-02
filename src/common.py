@@ -73,9 +73,14 @@ def get_random_file(path: str):
         files = p.read()
     files = files.splitlines()
     files.pop()
-    print(files)
+    # print(files)
+    a = b = []
     for i in files:
         print(i.strip().split(' '))
+        t = i.strip().split(' ')
+        a.append(t[0])
+        b.append(t[1])
+        print(dict(zip(b, a)))
 
 
 # 随机排序已生成的手机号码
