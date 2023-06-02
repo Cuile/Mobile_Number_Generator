@@ -50,7 +50,7 @@ def make_random(path: str):
     
     # 随机行号生成范围
     a = 1
-    b = 100
+    b = 10
     # 每次随机读取的号码个数
     step = 10
     rows = [0]
