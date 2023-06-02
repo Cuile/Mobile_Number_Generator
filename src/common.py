@@ -42,51 +42,67 @@ def get_random_lineno(a: int, b: int, step: int):
         print('无法生成随机行号集合，请重新设置随机行号范围')
         return set(line_no)
 
+# 读取文件，找到line_no包含的行号
+# 使用临时文件，保存未选中的行
+def get_random_line(file: str, line_no: set):
+    rows = []
+    i = 0
+    with os.open(file, 'r') as f_read:
+        # 删除现存的tmp文件
+        with os.open('rm -f {}'.format(path + '/tmp')) as p:
+            p.read()
+        with os.open(path + '/tmp', 'a') as tmp_csv:
+            for line in f_read:
+                i += 1
+                if i in line_no:
+                    rows.append(line)
+                else:
+                    tmp_csv.write(line)
+    print('读取行完成')
+    
+    # 使用tmp_csv替换file
+    with os.popen('rm -f {} && mv {} {}'.format(file, path + '/tmp', file), 'r') as p:
+        p.read()
+    return rows
+
+# 读取路径下的所有CSV文件名
+def get_random_file(path: str):
+    # csv_files = [name for name in os.listdir(path)
+    #             if name.endswith('.csv')]
+    with os.popen('wc -l *.csv') as p:
+        files = p.readlines()
+    files.pop()
+    print(files)
+    for i in files:
+        print(i.split(' '))
+
+
 # 随机排序已生成的手机号码
 def make_random(path: str):
-    # 读取路径下的所有CSV文件名
-    csv_files = [name for name in os.listdir(path)
-                if name.endswith('.csv')]
-    
-    # 随机行号生成范围
-    a = 1
-    b = 10
-    # 每次随机读取的号码个数
-    step = 10
-    rows = [0]
-    
     # 生成输出文件
-    with open(path + '/random.out', 'a') as out:
+    with os.open(path + '/random.out', 'a') as out:
+        rows = [0]
         while len(rows) != 0:
             rows = []
+
+            csv_files = get_random_file(path)
+            
+            """ # 随机行号生成范围
+            a = 1
+            b = 10
+            # 每次随机读取的号码个数
+            step = 10
             print('待处理行号 {}~{}'.format(a, b))
             
             for f in csv_files:
-                
-                line_no = get_random_lineno(a, b, step)
-                
                 # 随机选择一个文件，从中随机读取random_step个号码
                 # file = path + '/' + random.choice(csv_files)
                 # 选择一个文件，从中随机读取random_step个号码
                 file = path + '/' + csv_files
                 print('处理文件：{}'.format(file))
 
-                # 读取文件，找到line_no包含的行号
-                # 使用临时文件，保存未选中的行
-                i = 0
-                with open(file, 'r') as f_read:
-                    with open(path + '/tmp', 'a') as tmp_csv:
-                        for line in f_read:
-                            i += 1
-                            if i in line_no:
-                                rows.append(line)
-                            else:
-                                tmp_csv.write(line)
-                print('读取行完成')
-                
-                # 使用tmp_csv替换file
-                with os.popen('rm -f {} && mv {} {}'.format(file, path + '/tmp', file), 'r') as p:
-                    p.read()
+                line_no = get_random_lineno(a, b, step)
+                rows = get_random_line(file, line_no)
             
             # 随机排序rows
             random.shuffle(rows)
@@ -101,6 +117,6 @@ def make_random(path: str):
             print(15 * '=')
             
             # 测试时使用，保证while只循环一次
-            # rows = []
+            # rows = [] """
         else:
             print('号码合并随机排序完成')
