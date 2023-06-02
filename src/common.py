@@ -47,11 +47,11 @@ def get_random_lineno(a: int, b: int, step: int):
 def get_random_line(file: str, line_no: set):
     rows = []
     i = 0
-    with os.open(file, 'r') as f_read:
+    with open(file, 'r') as f_read:
         # 删除现存的tmp文件
-        with os.open('rm -f {}'.format(path + '/tmp')) as p:
+        with os.popen('rm -f {}'.format(path + '/tmp')) as p:
             p.read()
-        with os.open(path + '/tmp', 'a') as tmp_csv:
+        with open(path + '/tmp', 'a') as tmp_csv:
             for line in f_read:
                 i += 1
                 if i in line_no:
@@ -80,7 +80,7 @@ def get_random_file(path: str):
 # 随机排序已生成的手机号码
 def make_random(path: str):
     # 生成输出文件
-    with os.open(path + '/random.out', 'a') as out:
+    with open(path + '/random.out', 'a') as out:
         rows = [0]
         while len(rows) != 0:
             rows = []
