@@ -80,7 +80,7 @@ def get_random_files(path: str):
         t = i.strip().split(' ')
         csv_lineno.append(t[0])
         csv_files.append(t[1])
-    reutn csv_files, max(csv_lineno)
+    return csv_files, max(csv_lineno)
 
 # 随机排序已生成的手机号码
 def make_random(path: str):
