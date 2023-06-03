@@ -103,7 +103,7 @@ def make_random(path: str):
                 # 随机选择一个文件，从中随机读取random_step个号码
                 # file = path + '/' + random.choice(csv_files)
                 # 选择一个文件，从中随机读取random_step个号码
-                print('处理文件：{}'.format(f))
+                print('处理文件：{}'.format(f), end='')
 
                 line_no = get_random_lineno(1, int(max_lineno), step)
                 rows = get_random_line(f, line_no, path)
