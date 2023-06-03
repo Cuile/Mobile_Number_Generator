@@ -80,7 +80,7 @@ def get_random_files(path: str):
         t = i.strip().split(' ')
         csv_lineno.append(t[0])
         csv_files.append(t[1])
-    return csv_files, max(csv_lineno)
+    return csv_files, int(max(csv_lineno))
 
 # 随机排序已生成的手机号码
 def make_random(path: str):
@@ -95,7 +95,7 @@ def make_random(path: str):
             # print(get_random_files(path))
             
             # 每次随机读取的号码个数
-            if (step > int(max_lineno)):
+            if (step > 10) and (step > max_lineno):
                 step //= 10
             print('待处理行号 {}~{}，每个文件读取 {} 行'.format(1, max_lineno, step))
 
@@ -105,7 +105,7 @@ def make_random(path: str):
                 # 选择一个文件，从中随机读取random_step个号码
                 print('处理文件：{}'.format(f), end='')
 
-                line_no = get_random_lineno(1, int(max_lineno), step)
+                line_no = get_random_lineno(1, max_lineno, step)
                 rows = get_random_line(f, line_no, path)
             
             # 随机排序rows
