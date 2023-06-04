@@ -106,7 +106,7 @@ def make_random(path: str):
                 print('处理文件：{} ......'.format(f), end='')
 
                 line_no = get_random_lineno(1, max_lineno, step)
-                rows = get_random_line(f, line_no, path)
+                rows += get_random_line(f, line_no, path)
             
             # 随机排序rows
             random.shuffle(rows)
