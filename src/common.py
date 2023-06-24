@@ -29,7 +29,7 @@ def make_range(r: int, path: str, hash=None):
                 csv_writer.writerow([pn])
 
 # 生成随机行号集合
-def get_random_lineno(a: int, b: int, step: int):
+def make_random_lineno(a: int, b: int, step: int):
     # 生成随机读取的行数列表
     line_no = []
     try:
@@ -44,8 +44,8 @@ def get_random_lineno(a: int, b: int, step: int):
 
 # 读取文件，找到line_no包含的行号
 # 使用临时文件，保存未选中的行
-def get_random_line(file: str, line_no: set, path: str):
-    rows = []
+def read_line(file: str, line_no: set, path: str):
+    lines = []
     i = 0
     with open(file, 'r') as f_read:
         # 删除现存的tmp文件
@@ -55,7 +55,7 @@ def get_random_line(file: str, line_no: set, path: str):
             for line in f_read:
                 i += 1
                 if i in line_no:
-                    rows.append(line)
+                    lines.append(line)
                 else:
                     tmp_csv.write(line)
     print('读取行完成')
@@ -63,10 +63,10 @@ def get_random_line(file: str, line_no: set, path: str):
     # 使用tmp_csv替换file
     with os.popen('rm -f {} && mv {} {}'.format(file, path + '/tmp', file), 'r') as p:
         p.read()
-    return rows
+    return lines
 
 # 读取路径下的所有CSV文件名
-def get_random_files(path: str):
+def get_file_info(path: str):
     # csv_files = [name for name in os.listdir(path)
     #             if name.endswith('.csv')]
     with os.popen('wc -l ' + path + '/*.csv') as p:
@@ -91,8 +91,8 @@ def make_random(path: str):
         while len(rows) != 0:
             rows = []
 
-            csv_files, max_lineno = get_random_files(path)
-            # print(get_random_files(path))
+            csv_files, max_lineno = get_file_info(path)
+            # print(get_file_info(path))
             
             # 每次随机读取的号码个数
             if (step > 10) and (step > max_lineno):
@@ -102,11 +102,12 @@ def make_random(path: str):
             for f in csv_files:
                 # 随机选择一个文件，从中随机读取random_step个号码
                 # file = path + '/' + random.choice(csv_files)
+                
                 # 选择一个文件，从中随机读取random_step个号码
                 print('处理文件：{} ...... '.format(f), end='')
 
-                line_no = get_random_lineno(1, max_lineno, step)
-                rows += get_random_line(f, line_no, path)
+                line_no = make_random_lineno(1, max_lineno, step)
+                rows += read_line(f, line_no, path)
             
             # 随机排序rows
             random.shuffle(rows)
