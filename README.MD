@@ -54,12 +54,6 @@ $ make install
 $ rm -rf /usr/bin/make
 $ cp ./make /usr/bin/
 $ make -v
-GNU Make 4.2
-为 x86_64-pc-linux-gnu 编译
-Copyright (C) 1988-2016 Free Software Foundation, Inc.
-许可证：GPLv3+：GNU 通用公共许可证第 3 版或更新版本<http://gnu.org/licenses/gpl.html>。
-本软件是自由软件：您可以自由修改和重新发布它。
-在法律允许的范围内没有其他保证。
 
 $ cd ~
 $ rm -rf make-4.2*
