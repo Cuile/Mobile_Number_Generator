@@ -1,6 +1,6 @@
-# /bin/bash
+#!/bin/bash
 
-docker compose -f start.yml \
+docker compose -f ../docker/start.yml \
         run --rm \
         --entrypoint "python main.py" \
         mobile_number_generator \

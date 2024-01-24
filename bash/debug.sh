@@ -1,5 +1,5 @@
 # /bin/bash
 
-docker compose -f start.yml \
+docker compose -f ../docker/start.yml \
         run --rm \
         mobile_number_generator
