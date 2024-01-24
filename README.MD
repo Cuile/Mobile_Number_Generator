@@ -2,8 +2,7 @@
 
 命令行参数直接传递给镜像里的程序，直接生成结果。
 ```bash
-$ cd docker
-
+$ cd bash
 $ sh mng.sh -h
 $ sh mng.sh make_ragne -h
 $ sh mng.sh make_ragne -r 135 -p ../data
