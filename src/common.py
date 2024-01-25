@@ -69,7 +69,7 @@ def read_rows(file: str, line_no: set, path: str) -> list:
                 lines.append(row)
             else:
                 tmp_lines.append(row)
-        print("读取行完成")
+        print("读取 {} 行完成".format(i))
         writer.writerows(tmp_lines)
     # 使用tmp_csv替换file
     with os.popen(
@@ -149,7 +149,7 @@ def make_random(path: str) -> None:
             # 每次随机读取的号码个数
             if (count > 10) and (count > max_lineno):
                 count //= 10
-            print("待处理行号 {}~{}，每个文件读取 {} 行".format(1, max_lineno, count))
+            print("待处理行数 {}，每个文件计划读取 {} 行".format(max_lineno, count))
 
             for f in csv_files:
                 # 随机读取文件，从中随机读取random_step个号码
