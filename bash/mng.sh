@@ -1,6 +1,7 @@
 #!/bin/bash
-docker compose -f ../docker/build.yml build \
-                && \
+
+PROXY="https://github.jobcher.com/gh/" && \
+docker compose -f ../docker/build.yml build && \
 docker compose -f ../docker/start.yml run \
                 --rm \
                 --entrypoint "python main.py" \
