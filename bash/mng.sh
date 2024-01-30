@@ -1,6 +1,7 @@
 #!/bin/bash
-
-PROXY="https://github.jobcher.com/gh/" && \
+docker compose -f ../docker/build.yml \
+                build --ssh="default" \
+                && \
 docker compose -f ../docker/start.yml \
                 run --rm \
                 --entrypoint "python main.py" \
