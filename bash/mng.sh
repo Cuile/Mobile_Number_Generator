@@ -1,6 +1,6 @@
 #!/bin/bash
 docker compose -f ../docker/build.yml \
-                build --ssh="default" \
+                build \
                 && \
 docker compose -f ../docker/start.yml \
                 run --rm \
