@@ -1,5 +1,0 @@
-version: "3.7"
-services:
-  mobile_number_generator:
-    image: cuile/mobile_number_generator
-    build: ${PROXY}https://github.com/Cuile/Docker-Image.git#:Python/base/docker
