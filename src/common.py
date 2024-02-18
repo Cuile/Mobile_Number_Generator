@@ -112,20 +112,22 @@ def make_range(r: int, path: str, hash: str = "") -> None:
         path (str): 生成文件的保存路径
         hash (str, optional): 校验方法，如指定，则同时生成校验码。 Defaults to "".
     """
+    print("准备 {} 号段数据...".format(r))
     s = r * 100000000
     e = (r + 1) * 100000000
     target_file = path + "/" + str(r) + ".csv"
-    print("生成文件" + target_file)
     with open(target_file, "w", newline="") as f:
-        writer = csv.writer(f)
         pn = []
         if hash == "":
             for i in range(s, e):
-                pn.append(str(i))
+                pn.append("".join([str(i), "\n"]))
         else:
             for i in range(s, e):
-                pn.append([str(i), get_Hash(hash, str(i))])
-        writer.writerows(pn)
+                pn.append(",".join([str(i), "".join([get_Hash(hash, str(i)), "\n"])]))
+        print("开始写入文件...")
+        f.writelines(pn)
+        f.close()
+    print("写入文件完成 {}".format(target_file))
 
 
 def make_random(path: str) -> None:

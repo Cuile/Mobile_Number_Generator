@@ -3,10 +3,12 @@
 import argparse
 import textwrap
 
-import check_sum
 import common
 
+# import pysnooper
 
+
+# @pysnooper.snoop()
 def main():
     try:
         if args.function == "make_range":
@@ -23,6 +25,7 @@ def main():
                 common.make_random(args.path)
                 # cProfile.run('common.make_random(args.path)', sort = 'cumtime')
         # 以下代码未做调试
+        """ 
         elif args.function == "make_hash":
             if not args.path:
                 args.path = "."
@@ -110,14 +113,15 @@ def main():
             else:
                 raise RuntimeError("-t 或 --type 未设置")
         else:
-            raise RuntimeError("请使用 make 或 check 命令")
+            raise RuntimeError("请使用 make 或 check 命令") 
+        """
     except RuntimeError as err:
         print(
             textwrap.dedent(
                 """
-            {err}
-            usage: -h or --help arguments show help message
-            """.format(err=err)
+                {err}
+                usage: -h or --help arguments show help message
+                """.format(err=err)
             )
         )
 
@@ -134,9 +138,9 @@ if __name__ == "__main__":
         description=textwrap.dedent("""根据手机号段生成手机号码"""),
         epilog=textwrap.dedent(
             """
-                                        use: ./mng make_range -r 139 -p ../data
-                                        out: ../data/139.csv
-                                    """
+            use: ./mng make_range -r 139 -p ./data
+            out: ./data/139.csv
+            """
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )
@@ -165,9 +169,9 @@ if __name__ == "__main__":
         description=textwrap.dedent("""随机排序已生成的手机号码"""),
         epilog=textwrap.dedent(
             """
-                                        use: ./mng make_random -p ../data
-                                        out: ../data/randomout.csv
-                                    """
+            use: ./mng make_random -p ./data
+            out: ./data/randomout.csv
+            """
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )
