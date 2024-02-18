@@ -1,12 +1,14 @@
 version: "3.7"
 services:
   python_base:
-    image: cuile/python:base
+    pull_policy: never
+    image: cuile/${IMAGE}_base
     build:
       context: ${PROXY}https://github.com/Cuile/Docker-Image.git#:Python/base/docker
       args:
         - IMAGE=${IMAGE}
   mobile_number_generator:
+    pull_policy: never
     image: cuile/mobile_number_generator
     build: 
       context: ${PROXY}https://github.com/Cuile/Docker-Image.git#:Python/Dev/docker
@@ -17,3 +19,5 @@ services:
       - ../data:/usr/app/data/:rw
       - ../bin:/usr/app/bin/:rw
       - ../build:/usr/app/build/:rw
+    depends_on:
+      - python_base
