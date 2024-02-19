@@ -3,6 +3,7 @@ services:
   python_base:
     pull_policy: never
     image: cuile/${IMAGE}_base
+    container_name: python_base
     build:
       context: ${PROXY}https://github.com/Cuile/Docker-Image.git#:Python/base/docker
       args:
