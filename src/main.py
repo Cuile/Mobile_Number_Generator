@@ -5,140 +5,123 @@ import textwrap
 
 import common
 
-# import pysnooper
 
-
-# @pysnooper.snoop()
 def main():
-    try:
-        if args.function == "make_range":
-            if not args.path:
-                args.path = "."
-            if args.range:
-                common.make_range(args.range, args.path)
+    if args.function == "make_range":
+        common.make_range(args.range, args.path)
+    elif args.function == "make_random":
+        common.make_random(args.path)
+    # 以下代码未做调试
+    """ 
+    elif args.function == "make_hash":
+        if not args.path:
+            args.path = "."
+        if args.number:
+            if args.hash:
+                print(
+                    {
+                        "number": args.number,
+                        args.hash: hash.getHash(args.hash, str(args.number)),
+                    }
+                )
             else:
-                raise RuntimeError("-r 未设置")
-        elif args.function == "make_random":
-            if not args.path:
-                raise RuntimeError("-p 参数未指定")
-            else:
-                common.make_random(args.path)
-                # cProfile.run('common.make_random(args.path)', sort = 'cumtime')
-        # 以下代码未做调试
-        """ 
-        elif args.function == "make_hash":
-            if not args.path:
-                args.path = "."
-            if args.number:
+                raise RuntimeError("--hash 未设置")
+        # 按号段生成号码
+        elif args.range:
+            s = int(args.range) * 100000000
+            e = (int(args.range) + 1) * 100000000
+            target_file = args.path + "/" + str(args.range) + ".csv"
+            print(target_file)
+            with open(target_file, "wt") as f:
+                csv_writer = csv.writer(f)
                 if args.hash:
-                    print(
-                        {
-                            "number": args.number,
-                            args.hash: hash.getHash(args.hash, str(args.number)),
-                        }
-                    )
+                    for i in range(s, e):
+                        pn = str(i)
+                        csv_writer.writerow([pn, hash.getHash(args.hash, pn)])
                 else:
-                    raise RuntimeError("--hash 未设置")
-            # 按号段生成号码
-            elif args.range:
-                s = int(args.range) * 100000000
-                e = (int(args.range) + 1) * 100000000
-                target_file = args.path + "/" + str(args.range) + ".csv"
-                print(target_file)
-                with open(target_file, "wt") as f:
-                    csv_writer = csv.writer(f)
-                    if args.hash:
-                        for i in range(s, e):
-                            pn = str(i)
-                            csv_writer.writerow([pn, hash.getHash(args.hash, pn)])
-                    else:
-                        for i in range(s, e):
-                            pn = str(i)
-                            csv_writer.writerow([pn])
+                    for i in range(s, e):
+                        pn = str(i)
+                        csv_writer.writerow([pn])
+        elif args.source_file:
+            (filename, extension) = os.path.splitext(args.source_file)
+            with open(args.source_file, "rt") as rf, open(
+                filename + "." + args.hash, "wt"
+            ) as wf:
+                csv_reader = csv.reader(rf)
+                csv_writer = csv.writer(wf)
+                for r in csv_reader:
+                    csv_writer.writerow([hash.getHash(args.hash, r[0])])
+        else:
+            raise RuntimeError("请使用 -n 或 -r 或 -sf 设置参数")
+    elif args.function == "check":
+        if args.type:
+            if args.code:
+                print(
+                    {
+                        "code": args.code,
+                        args.type: check_sum.getCheckCode(
+                            args.type, str(args.code)
+                        )[args.type],
+                    }
+                )
             elif args.source_file:
                 (filename, extension) = os.path.splitext(args.source_file)
-                with open(args.source_file, "rt") as rf, open(
-                    filename + "." + args.hash, "wt"
-                ) as wf:
+                with open(args.source_file, "rt") as rf:
                     csv_reader = csv.reader(rf)
-                    csv_writer = csv.writer(wf)
-                    for r in csv_reader:
-                        csv_writer.writerow([hash.getHash(args.hash, r[0])])
-            else:
-                raise RuntimeError("请使用 -n 或 -r 或 -sf 设置参数")
-        elif args.function == "check":
-            if args.type:
-                if args.code:
-                    print(
-                        {
-                            "code": args.code,
-                            args.type: check_sum.getCheckCode(
-                                args.type, str(args.code)
-                            )[args.type],
-                        }
-                    )
-                elif args.source_file:
-                    (filename, extension) = os.path.splitext(args.source_file)
-                    with open(args.source_file, "rt") as rf:
-                        csv_reader = csv.reader(rf)
-                        if args.target_file:
-                            # 将设备码类型，做为输出文件后缀
-                            with open(
-                                "{filename}.{ext}".format(
-                                    filename=filename, ext=args.type
-                                ),
-                                "wt",
-                            ) as wf:
-                                csv_writer = csv.writer(wf)
-                                for r in csv_reader:
-                                    csv_writer.writerow(
-                                        [
-                                            check_sum.getCheckCode(
-                                                args.type, str(r[0])
-                                            )[args.type]
-                                        ]
-                                    )
-                        else:
+                    if args.target_file:
+                        # 将设备码类型，做为输出文件后缀
+                        with open(
+                            "{filename}.{ext}".format(
+                                filename=filename, ext=args.type
+                            ),
+                            "wt",
+                        ) as wf:
+                            csv_writer = csv.writer(wf)
                             for r in csv_reader:
-                                print(
-                                    {
-                                        "code": args.code,
-                                        args.type: check_sum.getCheckCode(
+                                csv_writer.writerow(
+                                    [
+                                        check_sum.getCheckCode(
                                             args.type, str(r[0])
-                                        )[args.type],
-                                    }
+                                        )[args.type]
+                                    ]
                                 )
-                else:
-                    raise RuntimeError("请使用 -c 或 -sf 设置参数")
+                    else:
+                        for r in csv_reader:
+                            print(
+                                {
+                                    "code": args.code,
+                                    args.type: check_sum.getCheckCode(
+                                        args.type, str(r[0])
+                                    )[args.type],
+                                }
+                            )
             else:
-                raise RuntimeError("-t 或 --type 未设置")
+                raise RuntimeError("请使用 -c 或 -sf 设置参数")
         else:
-            raise RuntimeError("请使用 make 或 check 命令") 
-        """
-    except RuntimeError as err:
-        print(
-            textwrap.dedent(
-                """
-                {err}
-                usage: -h or --help arguments show help message
-                """.format(err=err)
-            )
-        )
+            raise RuntimeError("-t 或 --type 未设置")
+    else:
+        raise RuntimeError("请使用 make 或 check 命令") 
+    """
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description=textwrap.dedent("""生成手机号和对应的校验码""")
+        prog="mng",
+        description=textwrap.dedent("""生成手机号段列表，及对应的校验码"""),
     )
-    subparsers = parser.add_subparsers(title="子命令", dest="function")
+    subparsers = parser.add_subparsers(
+        dest="function",
+        required=True,
+        metavar="",
+    )
 
     make_range = subparsers.add_parser(
         "make_range",
         help="根据手机号段生成手机号码",
-        description=textwrap.dedent("""根据手机号段生成手机号码"""),
+        description=textwrap.dedent("""根据手机号段生成手机号码列表"""),
         epilog=textwrap.dedent(
             """
-            use: ./mng make_range -r 139 -p ./data
+            use: ./mng make_range -r 139 138 -p ./data
             out: ./data/139.csv
             """
         ),
@@ -150,8 +133,10 @@ if __name__ == "__main__":
         metavar="range",
         dest="range",
         type=int,
-        action="store",
-        help="手机号段前3位，如133",
+        action="extend",
+        nargs="+",
+        help="手机号段前3位，如 139 138",
+        required=True,
     )
     make_range.add_argument(
         "-p",
@@ -161,6 +146,7 @@ if __name__ == "__main__":
         type=str,
         action="store",
         help="生成文件的保存路径",
+        default=".",
     )
 
     make_random = subparsers.add_parser(
@@ -183,6 +169,7 @@ if __name__ == "__main__":
         type=str,
         action="store",
         help="需要排序的文件路径",
+        required=True,
     )
 
     # make_hash = subparsers.add_parser('make_hash', help='生成号码hash值', description=textwrap.dedent('''生成手机号对应的hash值'''),

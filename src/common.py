@@ -104,30 +104,33 @@ def get_csv_info(path: str) -> tuple:
     return csv_files, int(max(csv_lineno))
 
 
-def make_range(r: int, path: str, hash: str = "") -> None:
+def make_range(range_list: list, path: str, hash: str = "") -> None:
     """根据号段生成号码及hash值
 
     Args:
-        r (int): 号段前3位，比如 139
+        range_list (list): 号段前3位，如 [139,138]
         path (str): 生成文件的保存路径
         hash (str, optional): 校验方法，如指定，则同时生成校验码。 Defaults to "".
     """
-    print("准备 {} 号段数据...".format(r))
-    s = r * 100000000
-    e = (r + 1) * 100000000
-    target_file = path + "/" + str(r) + ".csv"
-    with open(target_file, "w", newline="") as f:
-        pn = []
-        if hash == "":
-            for i in range(s, e):
-                pn.append("".join([str(i), "\n"]))
-        else:
-            for i in range(s, e):
-                pn.append(",".join([str(i), "".join([get_Hash(hash, str(i)), "\n"])]))
-        print("开始写入文件...")
-        f.writelines(pn)
-        f.close()
-    print("写入文件完成 {}".format(target_file))
+    for r in range_list:
+        print("准备 {} 号段数据...".format(r))
+        s = r * 100000000
+        e = (r + 1) * 100000000
+        target_file = path + "/" + str(r) + ".csv"
+        with open(target_file, "w", newline="") as f:
+            pn = []
+            if hash == "":
+                for i in range(s, e):
+                    pn.append("".join([str(i), "\n"]))
+            else:
+                for i in range(s, e):
+                    pn.append(
+                        ",".join([str(i), "".join([get_Hash(hash, str(i)), "\n"])])
+                    )
+            print("开始写入文件...")
+            f.writelines(pn)
+            f.close()
+        print("写入文件完成 {}".format(target_file))
 
 
 def make_random(path: str) -> None:
