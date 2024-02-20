@@ -11,6 +11,7 @@ services:
   mobile_number_generator:
     pull_policy: never
     image: cuile/mobile_number_generator
+    container_name: mobile_number_generator
     build: 
       context: ${PROXY}https://github.com/Cuile/Docker-Image.git#:Python/Dev/docker
       args:

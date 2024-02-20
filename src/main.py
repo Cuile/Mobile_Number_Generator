@@ -3,14 +3,14 @@
 import argparse
 import textwrap
 
-import common
+import make
 
 
 def main():
     if args.function == "make_range":
-        common.make_range(args.range, args.path)
+        make.make_range(args.range, args.path)
     elif args.function == "make_random":
-        common.make_random(args.path)
+        make.make_random(args.path)
     # 以下代码未做调试
     """ 
     elif args.function == "make_hash":
