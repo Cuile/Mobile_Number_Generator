@@ -10,7 +10,7 @@ def main():
     if args.function == "make_range":
         make.make_range(args.range, args.path)
     elif args.function == "make_random":
-        make.make_random(args.path)
+        make.make_random(args.path, args.buffer_rows)
     # 以下代码未做调试
     """ 
     elif args.function == "make_hash":
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     make_range.add_argument(
         "-r",
         "--range",
-        metavar="range",
+        metavar="int*3",
         dest="range",
         type=int,
         action="extend",
@@ -170,6 +170,16 @@ if __name__ == "__main__":
         action="store",
         help="需要排序的文件路径",
         required=True,
+    )
+    make_random.add_argument(
+        "-b",
+        "--buffer_rows",
+        metavar="int",
+        dest="buffer_rows",
+        type=int,
+        action="store",
+        help="最大缓存随机行数，默认 1000000 行",
+        default=1000000,
     )
 
     # make_hash = subparsers.add_parser('make_hash', help='生成号码hash值', description=textwrap.dedent('''生成手机号对应的hash值'''),

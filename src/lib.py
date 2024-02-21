@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import csv
 import hashlib
 import os
 import random
@@ -46,7 +45,7 @@ def get_random_number_set(min: int, max: int, count: int) -> set:
 
 
 def get_csv_info(path: str) -> tuple:
-    """读取路径下的所有CSV文件名
+    """读取路径下的所有CSV文件行数
 
     Args:
         path (str): 路径地址
@@ -69,8 +68,8 @@ def get_csv_info(path: str) -> tuple:
     return csv_files, int(max(csv_lineno))
 
 
-def read_rows(file: str, line_no: set, path: str) -> list:
-    """读取文件中，指定行的内容
+def read_random_rows(file: str, line_no: set, path: str) -> list:
+    """读取文件中指定行的内容
 
     Args:
         file (str): 要读取文件名
@@ -83,19 +82,15 @@ def read_rows(file: str, line_no: set, path: str) -> list:
     with open(file, "r", newline="") as f_read, open(
         path + "/tmp", "w", newline=""
     ) as tmp_csv:
-        reader = csv.reader(f_read)
-        writer = csv.writer(tmp_csv)
         lines = []
-        tmp_lines = []
         i = 0
-        for row in reader:
+        for row in f_read:
             i += 1
             if i in line_no:
                 lines.append(row)
             else:
-                tmp_lines.append(row)
-        print("读取 {:,} 行完成".format(i))
-        writer.writerows(tmp_lines)
+                tmp_csv.write(row)
+        print("读取 {:,} 行完成".format(len(lines)))
     # 使用tmp_csv替换file
     with os.popen(
         "rm -f {} && mv {} {}".format(file, path + "/tmp", file),
